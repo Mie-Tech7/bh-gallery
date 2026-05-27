@@ -1,0 +1,2842 @@
+<!doctype html>
+<html lang="en" data-tier="1">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Black Heritage Gallery — Celebrating Black Art</title>
+<meta name="description" content="Celebrating Black art and the voices of Black & African artists. Three decades of curated collections, featured artists, and professional appraisal services." />
+<meta name="theme-color" content="#C46B2D" />
+<meta name="apple-mobile-web-app-capable" content="yes" />
+<meta name="apple-mobile-web-app-status-bar-style" content="default" />
+<meta name="apple-mobile-web-app-title" content="Black Heritage" />
+<link rel="manifest" href="manifest.webmanifest" />
+<link rel="icon" type="image/svg+xml" href="icon.svg" />
+<link rel="apple-touch-icon" href="icon.svg" />
+<link rel="stylesheet" href="colors_and_type.css" />
+<style>
+  /* The original site leans warmer / more saturated than pure Tier 1 — it uses
+     a rust/terra-cotta accent (the "Returns" word, primary buttons) instead of
+     gold. Override the accent for this brand while keeping all other Tier-1
+     fundamentals (cream, serif display, generous whitespace, no gradients). */
+  :root {
+    --accent:     #C46B2D;   /* Black Heritage rust/terra-cotta */
+    --accent-ink: #9A4F1B;
+    --accent-soft:#F2E3D2;
+    --accent-tint:#FBF4EA;
+    --ink-soft:   #2B241D;
+    --rule-strong: rgba(26,24,20,0.18);
+  }
+
+  *, *::before, *::after { box-sizing: border-box; }
+
+  body {
+    margin: 0;
+    background: var(--bg);
+    color: var(--ink);
+    overflow-x: hidden;
+  }
+
+  img { max-width: 100%; display: block; }
+
+  .container {
+    max-width: 1240px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+  .container-wide {
+    max-width: 1360px;
+    margin: 0 auto;
+    padding: 0 32px;
+  }
+
+  /* ---------- NAV ---------- */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    background: #FFFFFF;
+    border-bottom: 1px solid rgba(26,24,20,0.08);
+    box-shadow: 0 1px 0 rgba(26,24,20,0.04);
+  }
+  .nav-inner {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    height: 76px;
+    padding: 0 32px;
+    max-width: 1360px;
+    margin: 0 auto;
+  }
+  .brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    text-decoration: none;
+    border: 0;
+  }
+  .brand-mark {
+    width: 36px;
+    height: 44px;
+    flex-shrink: 0;
+  }
+  .brand-text { line-height: 1; }
+  .brand-name {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--accent);
+    letter-spacing: -0.01em;
+  }
+  .brand-tag {
+    font-family: var(--font-body);
+    font-size: 11px;
+    color: var(--ink-3);
+    margin-top: 3px;
+    letter-spacing: 0.02em;
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: 36px;
+  }
+  .nav-links a {
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: var(--ink-soft);
+    border: 0;
+    transition: color 200ms var(--ease);
+  }
+  .nav-links a:hover { color: var(--accent); }
+  .nav-links a.is-active { color: var(--accent); font-weight: 600; }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    height: 44px;
+    padding: 0 22px;
+    border-radius: 9999px;
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 600;
+    border: 1px solid transparent;
+    cursor: pointer;
+    transition: all 200ms var(--ease);
+    text-decoration: none;
+    letter-spacing: -0.005em;
+  }
+  .btn-primary {
+    background: var(--accent);
+    color: #fff;
+    border-color: var(--accent);
+  }
+  .btn-primary:hover {
+    background: var(--accent-ink);
+    border-color: var(--accent-ink);
+    transform: translateY(-1px);
+  }
+  .btn-ghost {
+    background: #fff;
+    color: var(--ink);
+    border: 1px solid rgba(26,24,20,0.15);
+  }
+  .btn-ghost:hover { border-color: var(--accent); color: var(--accent); }
+  .btn-dark {
+    background: var(--ink);
+    color: #fff;
+    border-color: var(--ink);
+  }
+  .btn-dark:hover { background: #000; }
+  .btn-lg { height: 52px; padding: 0 28px; font-size: 16px; }
+
+  /* ---------- HERO ---------- */
+  .hero {
+    background: var(--bg);
+    padding: 80px 0 96px;
+  }
+  .hero-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .hero-eyebrow-mark {
+    width: 56px;
+    height: 64px;
+    margin-bottom: 28px;
+  }
+  .hero h1 {
+    font-size: clamp(3rem, 2rem + 3.5vw, 4.75rem);
+    font-weight: 600;
+    line-height: 1.02;
+    letter-spacing: -0.025em;
+    color: var(--ink);
+  }
+  .hero h1 .accent { color: var(--accent); font-style: italic; font-weight: 500;}
+  .hero h2.sub {
+    font-family: var(--font-display);
+    font-size: clamp(1.5rem, 1rem + 1vw, 2rem);
+    font-weight: 400;
+    color: var(--ink-soft);
+    margin-top: 18px;
+    letter-spacing: -0.01em;
+  }
+  .hero p.lede {
+    font-family: var(--font-body);
+    font-size: 1.125rem;
+    color: var(--ink-2);
+    margin-top: 22px;
+    max-width: 460px;
+    line-height: 1.55;
+  }
+  .hero-cta {
+    display: flex;
+    gap: 14px;
+    margin-top: 36px;
+    flex-wrap: wrap;
+  }
+
+  .hero-art {
+    position: relative;
+    aspect-ratio: 1 / 1;
+    border-radius: 18px;
+    overflow: hidden;
+    background: #1a1814;
+    box-shadow: 0 30px 60px -30px rgba(26,24,20,0.35);
+  }
+  .hero-art-img {
+    position: absolute;
+    inset: 0;
+    background-image: linear-gradient(135deg, rgba(196,107,45,0.0) 0%, rgba(0,0,0,0.5) 100%),
+      radial-gradient(circle at 30% 30%, rgba(232,180,120,0.18), transparent 55%);
+    background-color: #14110d;
+  }
+  .hero-art-img::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(ellipse 60% 40% at 50% 35%, rgba(196,107,45,0.18), transparent 70%),
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='600'><defs><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/><feColorMatrix values='0 0 0 0 0.7  0 0 0 0 0.5  0 0 0 0 0.3  0 0 0 0.18 0'/></filter></defs><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+    mix-blend-mode: screen;
+    opacity: 0.7;
+  }
+  .hero-art-caption {
+    position: absolute;
+    left: 28px;
+    bottom: 24px;
+    color: #fff;
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 500;
+    letter-spacing: 0.01em;
+    z-index: 2;
+  }
+  .hero-dots {
+    position: absolute;
+    bottom: -28px;
+    left: 50%;
+    transform: translateX(-50%);
+    display: flex;
+    gap: 6px;
+  }
+  .hero-dots span {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: var(--ink-3);
+    opacity: 0.35;
+  }
+  .hero-dots span.is-active { background: var(--accent); opacity: 1; }
+
+  /* ---------- SECTIONS ---------- */
+  .section {
+    padding: 96px 0;
+  }
+  .section-tight { padding: 80px 0; }
+  .section-rule {
+    width: 56px;
+    height: 3px;
+    background: var(--accent);
+    margin: 18px auto 0;
+    border: 0;
+  }
+  .section-head {
+    text-align: center;
+    margin-bottom: 56px;
+  }
+  .section-head h2 {
+    font-size: clamp(2rem, 1.5rem + 1.5vw, 2.75rem);
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+  }
+  .section-head p {
+    margin: 16px auto 0;
+    max-width: 620px;
+    color: var(--ink-2);
+    font-size: 1.0625rem;
+  }
+  .section-head--left {
+    text-align: left;
+    display: flex;
+    align-items: flex-end;
+    justify-content: space-between;
+    gap: 32px;
+  }
+  .section-head--left h2 { font-size: 2rem; letter-spacing: -0.02em; }
+
+  /* ---------- CHRISTMAS FEATURE (NEW from Black Art Depot) ---------- */
+  .feature-strip {
+    background: #EAF1F8;
+    background-image:
+      radial-gradient(circle at 90% 50%, rgba(196,107,45,0.04), transparent 40%);
+    position: relative;
+    overflow: hidden;
+  }
+  .feature-strip::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 800 600'><g fill='none' stroke='%2398B5D6' stroke-width='1' stroke-opacity='0.35'><path d='M0,100 Q200,80 400,140 T800,160'/><path d='M0,200 Q200,180 400,240 T800,260'/><path d='M0,300 Q200,280 400,340 T800,360'/><path d='M0,400 Q200,380 400,440 T800,460'/><path d='M0,500 Q200,480 400,540 T800,560'/></g></svg>");
+    background-size: cover;
+    opacity: 0.5;
+    pointer-events: none;
+  }
+  .feature-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 64px;
+    align-items: center;
+    position: relative;
+    z-index: 1;
+  }
+  .feature-art {
+    aspect-ratio: 4/5;
+    background:
+      radial-gradient(circle at 50% 35%, #B8825A 0%, #6B4225 30%, #2A1810 70%),
+      #1a0d05;
+    border-radius: 12px;
+    overflow: hidden;
+    position: relative;
+    box-shadow: 0 30px 60px -25px rgba(26,24,20,0.35);
+  }
+  .feature-art::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(ellipse 40% 50% at 50% 30%, #C8302A 0%, #8A1F1A 50%, transparent 70%);
+    opacity: 0.85;
+  }
+  .feature-art::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(ellipse 35% 28% at 50% 38%, #E8C9A8 0%, #B58B6E 50%, transparent 75%),
+      radial-gradient(ellipse 30% 18% at 50% 60%, rgba(245,235,220,0.55) 0%, transparent 70%);
+    opacity: 0.95;
+  }
+  .feature-art-tag {
+    position: absolute;
+    bottom: 18px;
+    left: 18px;
+    color: rgba(255,255,255,0.7);
+    font-family: var(--font-body);
+    font-size: 11px;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    z-index: 2;
+  }
+  .feature-strip h2 {
+    font-size: clamp(2.5rem, 2rem + 2vw, 4rem);
+    line-height: 1.05;
+    font-weight: 500;
+    letter-spacing: -0.025em;
+  }
+  .feature-strip p {
+    font-size: 1.125rem;
+    color: var(--ink-2);
+    margin-top: 20px;
+    max-width: 440px;
+    line-height: 1.55;
+  }
+  .feature-strip .btn { margin-top: 28px; }
+
+  /* ---------- ABOUT / HERITAGE ---------- */
+  .heritage-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 80px;
+    align-items: center;
+  }
+  .heritage-photo {
+    aspect-ratio: 1/1;
+    border-radius: 12px;
+    background:
+      radial-gradient(circle at 50% 35%, #d4a878 0%, #6f4d35 50%, #2b1d12 100%);
+    background-image:
+      linear-gradient(180deg, rgba(20,15,10,0) 30%, rgba(20,15,10,0.45) 100%),
+      radial-gradient(circle at 50% 38%, #c9a075 0%, #6c4a32 55%, #1f140c 100%);
+    box-shadow: 0 30px 60px -30px rgba(26,24,20,0.35);
+    position: relative;
+    overflow: hidden;
+  }
+  .heritage-photo::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='400' height='400'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2'/><feColorMatrix values='0 0 0 0 1  0 0 0 0 1  0 0 0 0 1  0 0 0 0.06 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+  .heritage-rule {
+    width: 64px;
+    height: 3px;
+    background: var(--accent);
+    margin-bottom: 20px;
+  }
+  .heritage h2 {
+    font-size: clamp(2rem, 1.4rem + 1.5vw, 2.75rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+  .heritage p {
+    font-size: 1.0625rem;
+    color: var(--ink-2);
+    margin-top: 18px;
+    line-height: 1.65;
+  }
+  .heritage p strong { color: var(--ink); font-weight: 600; }
+  .heritage-quote {
+    border: 1px solid var(--accent);
+    border-radius: 6px;
+    padding: 22px 26px;
+    margin-top: 32px;
+    font-family: var(--font-body);
+    font-style: italic;
+    font-size: 1rem;
+    line-height: 1.55;
+    color: var(--ink-soft);
+  }
+  .heritage-quote-attr {
+    font-style: normal;
+    font-size: 13px;
+    color: var(--ink-3);
+    display: block;
+    margin-top: 10px;
+  }
+
+  /* ---------- FEATURED COLLECTIONS (original) ---------- */
+  .collections-bg {
+    background-color: var(--bg);
+    background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='80' height='80'><circle cx='40' cy='40' r='28' fill='%23E8DBC4' fill-opacity='0.55'/></svg>");
+    background-size: 80px 80px;
+  }
+  .collections-grid {
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 24px;
+  }
+  .collection-card {
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 12px rgba(26,24,20,0.06);
+    transition: transform 300ms var(--ease), box-shadow 300ms var(--ease);
+    cursor: pointer;
+  }
+  .collection-card:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 16px 32px rgba(26,24,20,0.12);
+  }
+  .collection-thumb {
+    aspect-ratio: 1/1;
+    position: relative;
+    overflow: hidden;
+  }
+  .collection-thumb-1 {
+    background:
+      radial-gradient(circle at 30% 30%, rgba(255,255,255,0.05), transparent 50%),
+      #1a1814;
+  }
+  .collection-thumb-2 {
+    background:
+      linear-gradient(135deg, #6b4226 0%, #8a5a3a 30%, #c98a5a 70%, #6b3a26 100%),
+      #6b4226;
+  }
+  .collection-thumb-2::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(ellipse 35% 25% at 30% 50%, #4d2e1c 0%, transparent 60%),
+      radial-gradient(ellipse 28% 22% at 65% 55%, #3a2010 0%, transparent 60%),
+      radial-gradient(ellipse 22% 18% at 50% 75%, #1a0e08 0%, transparent 70%);
+  }
+  .collection-thumb-3 {
+    background: #efe6d9;
+    background-image:
+      linear-gradient(180deg, rgba(0,0,0,0.04) 0%, transparent 30%),
+      radial-gradient(circle at 50% 50%, #fff 0%, #e8dbc8 60%);
+  }
+  .collection-thumb-3::after {
+    content: "";
+    position: absolute;
+    left: 30%; right: 30%;
+    top: 35%;
+    height: 30%;
+    background: #fff;
+    border: 2px solid #c9b89a;
+    transform: rotate(-3deg);
+  }
+  .collection-thumb-4 {
+    background:
+      linear-gradient(135deg, #f4c52a 0%, #e84e1f 35%, #2d8a8a 65%, #2c1f6a 100%),
+      #d83a1a;
+  }
+  .collection-thumb-4::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      radial-gradient(ellipse 25% 35% at 50% 60%, rgba(0,0,0,0.45), transparent 70%);
+  }
+  .collection-meta {
+    padding: 18px 20px 22px;
+  }
+  .collection-meta h4 {
+    font-family: var(--font-display);
+    font-size: 1.125rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin: 0;
+  }
+  .collection-meta .cat {
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: var(--ink-3);
+    margin-top: 4px;
+  }
+  .collection-meta .cat.is-accent { color: var(--accent); }
+
+  /* ---------- FEATURED ARTISTS (NEW from Black Art Depot) ---------- */
+  .artists-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 28px;
+  }
+  .artist-card {
+    text-align: center;
+    cursor: pointer;
+  }
+  .artist-thumb {
+    aspect-ratio: 4/5;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #f3ead9;
+    border: 1px solid rgba(26,24,20,0.08);
+    transition: transform 300ms var(--ease), box-shadow 300ms var(--ease);
+    position: relative;
+  }
+  .artist-card:hover .artist-thumb {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 28px rgba(26,24,20,0.14);
+  }
+  .artist-thumb::after {
+    content: "";
+    position: absolute;
+    inset: 0;
+    background-image:
+      url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='200' height='200'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.8' numOctaves='2'/><feColorMatrix values='0 0 0 0 0  0 0 0 0 0  0 0 0 0 0  0 0 0 0.05 0'/></filter><rect width='100%25' height='100%25' filter='url(%23n)'/></svg>");
+  }
+  .artist-name {
+    font-family: var(--font-display);
+    font-size: 1rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-top: 16px;
+    line-height: 1.3;
+  }
+  .artist-medium {
+    font-family: var(--font-body);
+    font-size: 13px;
+    color: var(--ink-3);
+    margin-top: 4px;
+  }
+  /* Distinct artist gradients (placeholder portrait/painting fields) */
+  .a1 { background: linear-gradient(180deg,#d4861d 0%, #b85a18 35%, #2c5a8c 60%, #6b3a8a 100%); }
+  .a1::before {
+    content:""; position:absolute; inset:0;
+    background-image:
+      radial-gradient(ellipse 30% 22% at 50% 35%, #2a1a0a 0%, transparent 70%),
+      linear-gradient(135deg, transparent 60%, rgba(0,0,0,0.3) 100%);
+  }
+  .a2 { background: linear-gradient(180deg,#3d6090 0%, #c84a30 50%, #1a1a4a 100%); }
+  .a2::before {
+    content:""; position:absolute; inset:0;
+    background-image:
+      radial-gradient(ellipse 28% 22% at 50% 32%, #5a3520 0%, transparent 60%),
+      linear-gradient(180deg, transparent 50%, rgba(0,0,0,0.25) 100%);
+  }
+  .a3 { background: linear-gradient(180deg,#6b8a4a 0%, #b8a070 50%, #4a3520 100%); }
+  .a3::before {
+    content:""; position:absolute; inset:0;
+    background-image:
+      radial-gradient(ellipse 50% 30% at 50% 60%, #2a1a0a 0%, transparent 70%);
+  }
+  .a4 { background: linear-gradient(180deg,#8a5a30 0%, #4a2a1a 50%, #1a0a05 100%); }
+  .a4::before {
+    content:""; position:absolute; inset:0;
+    background-image:
+      radial-gradient(ellipse 35% 25% at 50% 45%, #c98a5a 0%, transparent 65%),
+      linear-gradient(180deg, transparent 60%, rgba(0,0,0,0.4) 100%);
+  }
+  .a5 { background: linear-gradient(180deg,#c84a30 0%, #d8a020 35%, #2c5a40 70%, #4a1a30 100%); }
+  .a5::before {
+    content:""; position:absolute; inset:0;
+    background-image:
+      radial-gradient(ellipse 28% 30% at 50% 50%, rgba(255,240,220,0.4) 0%, transparent 70%),
+      linear-gradient(135deg, transparent 50%, rgba(0,0,0,0.3) 100%);
+  }
+
+  /* ---------- SHOP BY (NEW from Black Art Depot) ---------- */
+  .shopby {
+    background: #fff;
+  }
+  .shopby-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 0;
+  }
+  .shopby-card {
+    aspect-ratio: 4/5;
+    position: relative;
+    overflow: hidden;
+    cursor: pointer;
+  }
+  .shopby-card::before {
+    content: "";
+    position: absolute; inset: 0;
+    transition: transform 600ms var(--ease);
+  }
+  .shopby-card:hover::before { transform: scale(1.04); }
+  .shopby-1::before {
+    background:
+      linear-gradient(135deg, #f5b425 0%, #e8401d 40%, #6b1a8a 70%, #d8b020 100%);
+  }
+  .shopby-1::after {
+    content: "";
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(ellipse 40% 25% at 30% 30%, #2a4a8a 0%, transparent 60%),
+      radial-gradient(ellipse 30% 30% at 70% 70%, #1a1a3a 0%, transparent 60%);
+    pointer-events: none;
+  }
+  .shopby-2::before {
+    background:
+      linear-gradient(180deg, #4a3a2a 0%, #2a1f15 40%, #6b4a30 80%, #8a6a45 100%);
+  }
+  .shopby-2::after {
+    content: "1619 — 1865";
+    position: absolute;
+    bottom: 28px; left: 50%;
+    transform: translateX(-50%);
+    font-family: var(--font-display);
+    font-size: 28px;
+    font-style: italic;
+    color: rgba(245,230,200,0.4);
+    letter-spacing: 0.05em;
+    pointer-events: none;
+  }
+  .shopby-3::before {
+    background:
+      linear-gradient(135deg, #c8302a 0%, #d8a020 25%, #4a8a30 50%, #2c5a8a 75%, #6b1a6a 100%);
+  }
+  .shopby-3::after {
+    content: "";
+    position: absolute; inset: 0;
+    background-image:
+      radial-gradient(ellipse 35% 30% at 50% 50%, rgba(20,10,30,0.4) 0%, transparent 70%);
+    pointer-events: none;
+  }
+  .shopby-content {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 32px;
+    z-index: 2;
+    text-align: center;
+  }
+  .shopby-card-inner {
+    background: rgba(20,15,10,0.78);
+    color: #fff;
+    padding: 32px 36px;
+    max-width: 340px;
+    backdrop-filter: blur(2px);
+  }
+  .shopby-card-inner h3 {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 500;
+    letter-spacing: -0.01em;
+    line-height: 1.05;
+  }
+  .shopby-card-inner p {
+    font-family: var(--font-body);
+    font-size: 0.9375rem;
+    line-height: 1.5;
+    margin: 14px 0 20px;
+    color: rgba(255,255,255,0.92);
+  }
+  .shopby-card-inner .btn {
+    background: #fff;
+    color: var(--ink);
+    border-radius: 0;
+    height: 42px;
+    padding: 0 22px;
+    font-weight: 600;
+  }
+  .shopby-card-inner .btn:hover { background: var(--accent); color: #fff; }
+
+  /* ---------- PROFESSIONAL APPRAISAL (original) ---------- */
+  .appraisal-bg { background: #fff; }
+  .appraisal-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+    align-items: start;
+  }
+  .credentials-card {
+    background: linear-gradient(135deg, #C46B2D 0%, #DC8B45 50%, #C46B2D 100%);
+    color: #fff;
+    border-radius: 8px;
+    padding: 32px 36px;
+    box-shadow: 0 20px 40px -20px rgba(196,107,45,0.4);
+  }
+  .credentials-card h3 {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin-bottom: 24px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+  .credentials-card .credentials-icon {
+    width: 28px; height: 28px;
+    background: rgba(255,255,255,0.2);
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 16px;
+  }
+  .credential-item {
+    display: flex;
+    gap: 14px;
+    padding: 14px 0;
+    border-top: 1px solid rgba(255,255,255,0.18);
+  }
+  .credential-item:first-of-type { border-top: 0; padding-top: 4px; }
+  .credential-item-icon {
+    width: 22px; height: 22px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .credential-item-title {
+    font-family: var(--font-body);
+    font-size: 15px;
+    font-weight: 700;
+    color: #fff;
+  }
+  .credential-item-desc {
+    font-family: var(--font-body);
+    font-size: 13.5px;
+    color: rgba(255,255,255,0.92);
+    line-height: 1.45;
+    margin-top: 2px;
+  }
+
+  .process-card {
+    background: #fff;
+    border: 1px solid rgba(26,24,20,0.10);
+    border-radius: 8px;
+    padding: 28px 30px;
+    margin-top: 24px;
+  }
+  .process-card h3 {
+    font-family: var(--font-display);
+    font-size: 1.375rem;
+    font-weight: 600;
+    margin-bottom: 18px;
+    color: var(--ink);
+  }
+  .process-step {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 10px 0;
+  }
+  .step-num {
+    width: 28px;
+    height: 28px;
+    border-radius: 50%;
+    background: var(--accent);
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 700;
+    flex-shrink: 0;
+  }
+  .process-step span {
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: var(--ink-soft);
+  }
+
+  .form-card {
+    background: #fff;
+    border: 1px solid rgba(26,24,20,0.10);
+    border-radius: 8px;
+    padding: 32px 36px;
+  }
+  .form-card h3 {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--ink);
+    margin-bottom: 22px;
+  }
+  .form-row { display: block; margin-bottom: 18px; }
+  .form-row label {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink-soft);
+    margin-bottom: 6px;
+  }
+  .form-row label .req { color: var(--accent); }
+  .form-row input,
+  .form-row textarea,
+  .form-row select {
+    width: 100%;
+    background: #FBF6EE;
+    border: 1px solid rgba(26,24,20,0.08);
+    border-radius: 6px;
+    padding: 12px 14px;
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: var(--ink);
+    transition: border-color 200ms var(--ease);
+  }
+  .form-row input:focus,
+  .form-row textarea:focus,
+  .form-row select:focus {
+    outline: none;
+    border-color: var(--accent);
+    background: #fff;
+  }
+  .form-row textarea { min-height: 110px; resize: vertical; font-family: var(--font-body); }
+  .submit-row .btn { width: 100%; justify-content: center; height: 48px; }
+  .form-foot {
+    font-family: var(--font-body);
+    font-size: 13.5px;
+    color: var(--accent);
+    text-align: center;
+    margin-top: 14px;
+  }
+
+  /* ---------- REVIEWS (NEW from Black Art Depot) ---------- */
+  .reviews-bg { background: var(--bg); }
+  .reviews-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 40px;
+    flex-wrap: wrap;
+    gap: 20px;
+  }
+  .reviews-head h2 {
+    font-family: var(--font-display);
+    font-size: 2rem;
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+  .reviews-meta {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: var(--ink-soft);
+  }
+  .stars-row {
+    display: inline-flex;
+    gap: 2px;
+    color: #E8A93B;
+  }
+  .stars-row svg { width: 18px; height: 18px; }
+  .review-count { font-weight: 600; color: var(--ink); }
+  .review-arrow {
+    width: 36px; height: 36px;
+    border: 1px solid rgba(26,24,20,0.15);
+    border-radius: 4px;
+    background: #fff;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    transition: border-color 200ms var(--ease);
+  }
+  .review-arrow:hover { border-color: var(--accent); color: var(--accent); }
+
+  .reviews-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 32px;
+  }
+  .review-card {
+    border-top: 1px solid var(--rule);
+    padding-top: 20px;
+  }
+  .review-stars-line {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 14px;
+  }
+  .review-date {
+    font-family: var(--font-body);
+    font-size: 12px;
+    color: var(--ink-3);
+  }
+  .review-body-row {
+    display: grid;
+    grid-template-columns: 84px 1fr;
+    gap: 16px;
+  }
+  .review-thumb {
+    aspect-ratio: 1/1;
+    border-radius: 4px;
+    background: #f0e6d4;
+    overflow: hidden;
+    position: relative;
+  }
+  .rt-1 { background: linear-gradient(180deg, #4a2a4a 0%, #1a0a1a 100%); }
+  .rt-1::after { content:""; position: absolute; inset: 12% 8%; border-radius: 50% 50% 0 0; background: #6b3a6a; }
+  .rt-2 {
+    background:
+      linear-gradient(135deg, #2c5a8a 0%, #d8a020 50%, #c8302a 100%);
+  }
+  .rt-2::after {
+    content:""; position:absolute; inset:0;
+    background-image: radial-gradient(ellipse 30% 25% at 50% 45%, #1a1a3a 0%, transparent 70%);
+  }
+  .rt-3 {
+    background:
+      linear-gradient(180deg, #4a8a4a 0%, #6b5a30 50%, #2c3a1a 100%);
+  }
+  .rt-3::after {
+    content:""; position:absolute; inset: 30% 25%;
+    background: rgba(255,235,200,0.55);
+    border-radius: 50%;
+  }
+  .review-thumb-cap {
+    font-family: var(--font-body);
+    font-size: 11px;
+    color: var(--ink-3);
+    margin-top: 6px;
+    line-height: 1.3;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+  .review-thumb-cap a { border: 0; color: inherit; }
+  .review-text {
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: var(--ink-soft);
+    line-height: 1.55;
+  }
+  .review-text strong {
+    display: block;
+    font-family: var(--font-display);
+    font-weight: 600;
+    color: var(--ink);
+    text-decoration: underline;
+    text-underline-offset: 3px;
+    text-decoration-thickness: 1px;
+    margin-bottom: 6px;
+  }
+  .review-author {
+    font-family: var(--font-body);
+    font-weight: 600;
+    color: var(--ink);
+    margin-top: 8px;
+    font-size: 14px;
+  }
+  .verified-badge {
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    font-size: 11px;
+    color: var(--ink-3);
+    margin-top: 4px;
+  }
+  .verified-badge::before {
+    content: ""; width: 14px; height: 14px;
+    background: #5a8a4a;
+    border-radius: 50%;
+    display: inline-block;
+  }
+
+  /* ---------- TOP RATED PRODUCTS (NEW from Black Art Depot) ---------- */
+  .products-bg { background: #fff; }
+  .products-grid {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 28px;
+  }
+  .product-card { cursor: pointer; }
+  .product-thumb {
+    aspect-ratio: 1/1;
+    border-radius: 4px;
+    overflow: hidden;
+    background: #f3ead9;
+    position: relative;
+    transition: transform 300ms var(--ease);
+  }
+  .product-card:hover .product-thumb { transform: translateY(-3px); }
+  .pt-1 { background: #1a1410; }
+  .pt-1::after {
+    content: ""; position: absolute; inset: 14% 22% 12% 22%;
+    background:
+      radial-gradient(circle at 50% 30%, #5a3a2a 0%, #1a0e08 40%);
+    clip-path: polygon(28% 0, 72% 0, 100% 18%, 88% 100%, 12% 100%, 0 18%);
+  }
+  .pt-2 { background: #f5efe2; }
+  .pt-2::after {
+    content: ""; position: absolute; inset: 18% 24% 16% 24%;
+    background: #1a1410;
+    clip-path: polygon(28% 0, 72% 0, 100% 18%, 88% 100%, 12% 100%, 0 18%);
+    opacity: 0.85;
+  }
+  .pt-3 {
+    background:
+      linear-gradient(180deg, #8a6a3a 0%, #4a2a1a 100%);
+  }
+  .pt-3::after {
+    content: ""; position: absolute; inset: 0;
+    background-image:
+      radial-gradient(ellipse 35% 30% at 50% 45%, #d8a865 0%, #6b3a25 50%, transparent 75%);
+  }
+  .pt-4 {
+    background:
+      linear-gradient(180deg, #2c5a8a 0%, #6b8a3a 60%, #4a3520 100%);
+  }
+  .pt-4::after {
+    content:""; position:absolute; inset:0;
+    background-image:
+      radial-gradient(ellipse 28% 22% at 50% 40%, #f5e6c8 0%, transparent 65%);
+  }
+  .pt-5 {
+    background:
+      linear-gradient(135deg, #d8a020 0%, #c8302a 40%, #6b1a6a 100%);
+  }
+  .pt-5::after {
+    content:""; position:absolute; inset:0;
+    background-image:
+      radial-gradient(ellipse 30% 35% at 50% 50%, rgba(20,10,30,0.55) 0%, transparent 70%);
+  }
+  .product-meta { padding-top: 14px; }
+  .product-name {
+    font-family: var(--font-body);
+    font-size: 14.5px;
+    color: var(--ink);
+    line-height: 1.4;
+    font-weight: 500;
+  }
+  .product-stars {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 8px;
+    color: #E8A93B;
+  }
+  .product-stars svg { width: 14px; height: 14px; }
+  .product-stars span {
+    color: var(--ink-3);
+    font-size: 13px;
+    font-family: var(--font-body);
+  }
+
+  /* ---------- COMMUNITY (original) ---------- */
+  .community-bg { background: var(--bg); padding: 96px 0; }
+  .community-card {
+    background: #fff;
+    border-radius: 10px;
+    border: 1px solid rgba(26,24,20,0.06);
+    padding: 48px 56px;
+    max-width: 720px;
+    margin: 0 auto;
+    box-shadow: 0 6px 20px rgba(26,24,20,0.04);
+  }
+  .community h2 {
+    text-align: center;
+    font-size: clamp(1.75rem, 1.4rem + 1vw, 2.25rem);
+    font-weight: 600;
+    letter-spacing: -0.02em;
+  }
+  .community .lede {
+    text-align: center;
+    color: var(--ink-2);
+    font-size: 1.0625rem;
+    margin: 14px auto 36px;
+    max-width: 540px;
+  }
+  .email-row {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 24px;
+  }
+  .email-row input {
+    flex: 1;
+    background: #FBF6EE;
+    border: 1px solid rgba(26,24,20,0.10);
+    border-radius: 6px;
+    padding: 12px 14px;
+    font-family: var(--font-body);
+    font-size: 15px;
+  }
+  .email-row input:focus { outline: none; border-color: var(--accent); background: #fff; }
+  .email-row .send-btn {
+    width: 44px; height: 44px;
+    background: var(--accent);
+    border: 0;
+    border-radius: 6px;
+    color: #fff;
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+  }
+  .email-row .send-btn:hover { background: var(--accent-ink); }
+  .interests-label {
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink-soft);
+    margin-bottom: 12px;
+  }
+  .interests-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px 24px;
+    margin-bottom: 24px;
+  }
+  .interest-row {
+    display: flex; align-items: center; gap: 10px;
+    cursor: pointer;
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: var(--ink-soft);
+    user-select: none;
+  }
+  .checkbox {
+    width: 18px; height: 18px;
+    border: 1.5px solid rgba(26,24,20,0.20);
+    border-radius: 3px;
+    display: inline-flex;
+    align-items: center; justify-content: center;
+    background: #fff;
+    transition: all 150ms var(--ease);
+  }
+  .interest-row.is-on .checkbox {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+  .interest-row.is-on .checkbox::after {
+    content: ""; width: 10px; height: 6px;
+    border: 1.5px solid #fff;
+    border-top: 0; border-right: 0;
+    transform: rotate(-45deg) translate(1px, -1px);
+  }
+  .join-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    width: 100%;
+    height: 50px;
+    background: #fff;
+    color: var(--accent);
+    border: 1.5px solid var(--accent);
+    border-radius: 9999px;
+    font-family: var(--font-body);
+    font-weight: 700;
+    font-size: 15px;
+    cursor: pointer;
+    transition: all 200ms var(--ease);
+  }
+  .join-btn:hover { background: var(--accent); color: #fff; }
+  .privacy {
+    font-family: var(--font-body);
+    font-size: 12px;
+    text-align: center;
+    color: var(--ink-3);
+    margin-top: 16px;
+  }
+
+  /* ---------- FOOTER (NEW expanded from Black Art Depot dark style) ---------- */
+  .footer {
+    background: #0E0B07;
+    color: rgba(255,255,255,0.85);
+    padding: 80px 0 36px;
+  }
+  .footer-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr 1fr 1fr 1fr;
+    gap: 40px;
+  }
+  .footer-col h5 {
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+    color: #fff;
+    margin-bottom: 20px;
+  }
+  .footer-col a {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 14.5px;
+    color: rgba(255,255,255,0.72);
+    border: 0;
+    padding: 6px 0;
+    transition: color 200ms var(--ease);
+  }
+  .footer-col a:hover { color: var(--accent); }
+  .footer-brand {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    margin-bottom: 16px;
+  }
+  .footer-brand-mark {
+    width: 32px; height: 38px;
+  }
+  .footer-brand-name {
+    font-family: var(--font-display);
+    font-size: 19px;
+    font-weight: 600;
+    color: #fff;
+  }
+  .footer-blurb {
+    font-family: var(--font-body);
+    font-size: 14px;
+    color: rgba(255,255,255,0.65);
+    line-height: 1.55;
+    margin-bottom: 24px;
+    max-width: 280px;
+  }
+  .footer-contact-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    color: rgba(255,255,255,0.78);
+    font-size: 14px;
+    padding: 6px 0;
+  }
+  .footer-contact-item svg { width: 16px; height: 16px; flex-shrink: 0; margin-top: 3px; opacity: 0.85; }
+  .socials {
+    display: flex;
+    gap: 14px;
+    margin-top: 4px;
+    margin-bottom: 22px;
+  }
+  .socials a {
+    width: 32px; height: 32px;
+    background: rgba(255,255,255,0.06);
+    border-radius: 50%;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    padding: 0;
+    transition: background 200ms var(--ease);
+  }
+  .socials a:hover { background: var(--accent); }
+  .socials svg { width: 14px; height: 14px; color: #fff; }
+
+  .verified-pill {
+    background:
+      radial-gradient(circle at 50% 50%, #E8A93B 0%, #C48A28 60%, #8E6320 100%);
+    color: #1a1410;
+    padding: 14px 18px;
+    border-radius: 8px;
+    text-align: center;
+    font-family: var(--font-display);
+    font-weight: 600;
+    margin-top: 10px;
+    width: 160px;
+  }
+  .verified-pill .num {
+    font-size: 22px;
+    line-height: 1;
+    display: block;
+  }
+  .verified-pill .stars-tiny {
+    color: #fff;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    margin-top: 4px;
+  }
+  .verified-pill .ribbon {
+    background: var(--accent);
+    color: #fff;
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.12em;
+    padding: 4px 8px;
+    margin: 8px -18px -14px;
+    text-transform: uppercase;
+  }
+
+  .currency-select {
+    background: #fff;
+    color: var(--ink);
+    padding: 8px 14px;
+    border-radius: 4px;
+    font-family: var(--font-body);
+    font-size: 13px;
+    margin-top: 10px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 0;
+    cursor: pointer;
+  }
+
+  .footer-bottom {
+    border-top: 1px solid rgba(255,255,255,0.10);
+    margin-top: 56px;
+    padding-top: 24px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-family: var(--font-body);
+    font-size: 13px;
+    color: rgba(255,255,255,0.5);
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  /* ---------- NAV ACTIONS (login + cart) ---------- */
+  .nav-actions {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+  }
+  .nav-icon-btn {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    background: transparent;
+    border: 1px solid transparent;
+    border-radius: 9999px;
+    padding: 8px 14px 8px 12px;
+    color: var(--ink-soft);
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 180ms var(--ease);
+  }
+  .nav-icon-btn:hover {
+    background: var(--accent-tint);
+    color: var(--accent);
+  }
+  .nav-icon-label { letter-spacing: -0.005em; }
+  .cart-pip {
+    position: absolute;
+    top: 2px;
+    right: 4px;
+    min-width: 18px;
+    height: 18px;
+    padding: 0 5px;
+    border-radius: 9999px;
+    background: var(--accent);
+    color: #fff;
+    font-size: 11px;
+    font-weight: 700;
+    line-height: 18px;
+    text-align: center;
+    transform: scale(0);
+    transform-origin: center;
+    transition: transform 220ms cubic-bezier(0.5, 1.5, 0.6, 1);
+  }
+  .cart-pip.is-on { transform: scale(1); }
+
+  /* ---------- DRAWERS / MODALS — shared ---------- */
+  .drawer-scrim,
+  .modal-scrim {
+    position: fixed;
+    inset: 0;
+    background: rgba(20,15,10,0.45);
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 240ms var(--ease);
+    z-index: 80;
+  }
+  .drawer-scrim.is-on,
+  .modal-scrim.is-on {
+    opacity: 1;
+    pointer-events: auto;
+  }
+  .drawer-close {
+    width: 36px;
+    height: 36px;
+    border-radius: 50%;
+    border: 1px solid rgba(26,24,20,0.10);
+    background: #fff;
+    color: var(--ink-soft);
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    transition: all 180ms var(--ease);
+  }
+  .drawer-close:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+
+  /* ---------- CART DRAWER ---------- */
+  .cart-drawer {
+    position: fixed;
+    top: 0; right: 0;
+    width: min(420px, 92vw);
+    height: 100vh;
+    background: #FFFDF8;
+    border-left: 1px solid rgba(26,24,20,0.08);
+    box-shadow: -20px 0 60px rgba(20,15,10,0.18);
+    z-index: 90;
+    transform: translateX(100%);
+    transition: transform 320ms var(--ease);
+    display: flex;
+    flex-direction: column;
+  }
+  .cart-drawer.is-open { transform: translateX(0); }
+  .cart-drawer-head {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 24px 28px;
+    border-bottom: 1px solid var(--rule);
+  }
+  .cart-drawer-head h3 {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 600;
+    margin: 0;
+    letter-spacing: -0.015em;
+  }
+  .cart-drawer-sub {
+    font-family: var(--font-body);
+    font-size: 13px;
+    color: var(--ink-3);
+    margin-top: 2px;
+  }
+  .cart-items {
+    flex: 1;
+    overflow-y: auto;
+    padding: 8px 28px;
+  }
+  .cart-item {
+    display: grid;
+    grid-template-columns: 78px 1fr auto;
+    gap: 16px;
+    padding: 22px 0;
+    border-bottom: 1px solid var(--rule);
+    align-items: flex-start;
+  }
+  .cart-item:last-child { border-bottom: 0; }
+  .cart-item-thumb {
+    width: 78px;
+    height: 92px;
+    border-radius: 4px;
+    overflow: hidden;
+    position: relative;
+    background: #f0e6d4;
+  }
+  .ci-1 {
+    background:
+      radial-gradient(circle at 50% 35%, #d4a878 0%, #6f4d35 50%, #2b1d12 100%);
+  }
+  .ci-1::after {
+    content:""; position:absolute; inset:0;
+    background-image: radial-gradient(ellipse 35% 28% at 50% 38%, #c9a075 0%, #6c4a32 55%, #1f140c 100%);
+  }
+  .ci-2 {
+    background: linear-gradient(135deg, #6b4226 0%, #c98a5a 60%, #6b3a26 100%);
+  }
+  .ci-2::after {
+    content:""; position:absolute; inset:0;
+    background-image:
+      radial-gradient(ellipse 30% 22% at 30% 50%, #4d2e1c 0%, transparent 60%),
+      radial-gradient(ellipse 25% 22% at 65% 55%, #3a2010 0%, transparent 60%);
+  }
+  .ci-3 {
+    background: linear-gradient(135deg, #d8a020 0%, #c8302a 50%, #6b1a6a 100%);
+  }
+  .ci-3::after {
+    content:""; position:absolute; inset:0;
+    background-image: radial-gradient(ellipse 30% 30% at 50% 50%, rgba(20,10,30,0.5) 0%, transparent 70%);
+  }
+  .cart-item-info { padding-top: 2px; }
+  .cart-item-name {
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink);
+    line-height: 1.3;
+    letter-spacing: -0.005em;
+  }
+  .cart-item-meta {
+    font-family: var(--font-body);
+    font-size: 12.5px;
+    color: var(--ink-3);
+    margin-top: 4px;
+  }
+  .qty-row {
+    display: inline-flex;
+    align-items: center;
+    border: 1px solid rgba(26,24,20,0.12);
+    border-radius: 9999px;
+    background: #fff;
+    margin-top: 12px;
+    overflow: hidden;
+  }
+  .qty-btn {
+    width: 28px; height: 28px;
+    background: transparent;
+    border: 0;
+    color: var(--ink-soft);
+    cursor: pointer;
+    font-size: 14px;
+    line-height: 1;
+    transition: color 150ms var(--ease);
+  }
+  .qty-btn:hover { color: var(--accent); }
+  .qty-val {
+    width: 24px;
+    text-align: center;
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 600;
+  }
+  .cart-item-side {
+    text-align: right;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 12px;
+  }
+  .cart-item-price {
+    font-family: var(--font-display);
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: -0.005em;
+  }
+  .cart-item-remove {
+    background: transparent;
+    border: 0;
+    font-family: var(--font-body);
+    font-size: 12px;
+    color: var(--ink-3);
+    cursor: pointer;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+    padding: 0;
+  }
+  .cart-item-remove:hover { color: var(--accent); }
+
+  .cart-empty {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    padding: 32px;
+    gap: 16px;
+    color: var(--ink-3);
+  }
+  .cart-empty p {
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: var(--ink-2);
+  }
+
+  .cart-foot {
+    border-top: 1px solid var(--rule);
+    padding: 22px 28px 28px;
+    background: #FCF8F0;
+  }
+  .cart-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: baseline;
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: var(--ink-soft);
+    margin-bottom: 8px;
+  }
+  .cart-row-sub {
+    font-size: 13px;
+    color: var(--ink-3);
+    margin-bottom: 18px;
+  }
+  .cart-subtotal {
+    font-family: var(--font-display);
+    font-size: 22px;
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: -0.01em;
+  }
+  .cart-checkout {
+    width: 100%;
+    justify-content: center;
+  }
+  .cart-continue {
+    display: block;
+    text-align: center;
+    margin-top: 14px;
+    font-family: var(--font-body);
+    font-size: 13px;
+    color: var(--ink-3);
+    border: 0;
+  }
+  .cart-continue:hover { color: var(--accent); }
+
+  /* ---------- AUTH MODAL ---------- */
+  .auth-modal {
+    position: fixed;
+    top: 50%; left: 50%;
+    transform: translate(-50%, -48%);
+    width: min(440px, 92vw);
+    max-height: 92vh;
+    overflow-y: auto;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 30px 80px -20px rgba(20,15,10,0.4);
+    z-index: 95;
+    opacity: 0;
+    pointer-events: none;
+    transition: all 240ms var(--ease);
+    padding: 36px 40px 32px;
+  }
+  .auth-modal.is-open {
+    opacity: 1;
+    pointer-events: auto;
+    transform: translate(-50%, -50%);
+  }
+  .auth-close {
+    position: absolute;
+    top: 16px; right: 16px;
+  }
+  .auth-tabs {
+    display: flex;
+    background: var(--bg);
+    border-radius: 9999px;
+    padding: 4px;
+    margin-bottom: 28px;
+    width: fit-content;
+  }
+  .auth-tab {
+    background: transparent;
+    border: 0;
+    padding: 8px 18px;
+    border-radius: 9999px;
+    font-family: var(--font-body);
+    font-size: 13.5px;
+    font-weight: 600;
+    color: var(--ink-2);
+    cursor: pointer;
+    transition: all 180ms var(--ease);
+    letter-spacing: -0.005em;
+  }
+  .auth-tab.is-active {
+    background: #fff;
+    color: var(--ink);
+    box-shadow: 0 2px 8px rgba(20,15,10,0.08);
+  }
+  .auth-eyebrow {
+    font-family: var(--font-body);
+    font-size: 11px;
+    font-weight: 700;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 10px;
+  }
+  .auth-pane h3,
+  .auth-pane h4 {
+    font-family: var(--font-display);
+    font-size: 1.5rem;
+    font-weight: 600;
+    color: var(--ink);
+    letter-spacing: -0.02em;
+    margin: 0 0 8px;
+    line-height: 1.15;
+  }
+  .auth-sub {
+    font-family: var(--font-body);
+    font-size: 14.5px;
+    color: var(--ink-2);
+    line-height: 1.5;
+    margin: 0 0 26px;
+  }
+  .auth-form .form-row { margin-bottom: 14px; }
+  .auth-form .form-row label {
+    font-size: 13px;
+    margin-bottom: 5px;
+  }
+  .auth-form .form-row input {
+    background: #FBF6EE;
+    border-radius: 8px;
+  }
+  .form-row-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 5px;
+  }
+  .form-row-flex label { margin-bottom: 0 !important; }
+  .form-row-aux {
+    font-family: var(--font-body);
+    font-size: 12.5px;
+    color: var(--accent);
+    border: 0;
+  }
+  .form-row-aux:hover { text-decoration: underline; }
+  .form-row-2col {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 12px;
+  }
+  .form-row-2col label {
+    display: block;
+    font-family: var(--font-body);
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ink-soft);
+    margin-bottom: 5px;
+  }
+  .form-row-2col input {
+    width: 100%;
+    background: #FBF6EE;
+    border: 1px solid rgba(26,24,20,0.08);
+    border-radius: 8px;
+    padding: 12px 14px;
+    font-family: var(--font-body);
+    font-size: 15px;
+    color: var(--ink);
+  }
+  .form-row-2col input:focus {
+    outline: none;
+    border-color: var(--accent);
+    background: #fff;
+  }
+  .remember-row {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-family: var(--font-body);
+    font-size: 13.5px;
+    color: var(--ink-soft);
+    margin: 8px 0 22px;
+    cursor: pointer;
+    user-select: none;
+  }
+  .remember-row .checkbox {
+    width: 18px; height: 18px;
+    border: 1.5px solid rgba(26,24,20,0.20);
+    border-radius: 4px;
+    display: inline-flex;
+    align-items: center; justify-content: center;
+    background: #fff;
+    flex-shrink: 0;
+    transition: all 150ms var(--ease);
+  }
+  .remember-row .checkbox.is-on {
+    background: var(--accent);
+    border-color: var(--accent);
+  }
+  .remember-row .checkbox.is-on .checkbox-mark {
+    width: 9px; height: 5px;
+    border: 1.5px solid #fff;
+    border-top: 0; border-right: 0;
+    transform: rotate(-45deg) translate(1px, -1px);
+    display: inline-block;
+  }
+  .auth-submit {
+    width: 100%;
+    justify-content: center;
+  }
+  .auth-or {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    margin: 22px 0 18px;
+    font-family: var(--font-body);
+    font-size: 12px;
+    color: var(--ink-3);
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+  }
+  .auth-or::before,
+  .auth-or::after {
+    content: "";
+    flex: 1;
+    height: 1px;
+    background: var(--rule);
+  }
+  .auth-social {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+  }
+  .auth-social-btn {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    height: 44px;
+    background: #fff;
+    border: 1px solid rgba(26,24,20,0.12);
+    border-radius: 9999px;
+    font-family: var(--font-body);
+    font-size: 14px;
+    font-weight: 600;
+    color: var(--ink);
+    cursor: pointer;
+    transition: all 180ms var(--ease);
+  }
+  .auth-social-btn:hover {
+    border-color: var(--accent);
+    color: var(--accent);
+  }
+  .auth-fineprint {
+    font-family: var(--font-body);
+    font-size: 12px;
+    color: var(--ink-3);
+    text-align: center;
+    line-height: 1.5;
+    margin-top: 16px;
+  }
+  .auth-fineprint a { color: var(--ink-soft); border-bottom-color: var(--rule); }
+  .auth-fineprint a:hover { color: var(--accent); }
+
+  .auth-success {
+    text-align: center;
+    padding: 12px 0;
+  }
+  .auth-success-icon {
+    width: 56px;
+    height: 56px;
+    margin: 0 auto 18px;
+    border-radius: 50%;
+    background: #E8F2E5;
+    color: #3a6b35;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+  .auth-success p {
+    font-family: var(--font-body);
+    font-size: 14.5px;
+    color: var(--ink-2);
+    margin: 0 0 24px;
+  }
+
+  body.lock-scroll { overflow: hidden; }
+
+  /* ---------- RESPONSIVE ---------- */
+  @media (max-width: 1080px) {
+    .collections-grid, .artists-grid, .products-grid { grid-template-columns: repeat(3, 1fr); }
+    .footer-grid { grid-template-columns: repeat(3, 1fr); }
+    .reviews-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 980px) {
+    .nav-icon-label { display: none; }
+    .nav-icon-btn { padding: 8px; }
+  }
+  @media (max-width: 820px) {
+    .nav-links { display: none; }
+    .nav-actions .btn-primary { display: none; }
+    .hero-grid, .feature-grid, .heritage-grid, .appraisal-grid { grid-template-columns: 1fr; gap: 48px; }
+    .collections-grid, .artists-grid, .products-grid { grid-template-columns: repeat(2, 1fr); }
+    .shopby-grid { grid-template-columns: 1fr; }
+    .reviews-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: repeat(2, 1fr); }
+    .section { padding: 64px 0; }
+    .community-card { padding: 32px 24px; }
+  }
+</style>
+</head>
+<body>
+
+<!-- ============== NAV ============== -->
+<header class="nav" data-screen-label="Site nav">
+  <div class="nav-inner">
+    <a class="brand" href="#top">
+      <svg class="brand-mark" viewBox="0 0 36 44" fill="none" aria-hidden="true">
+        <!-- abstract African sculpture / mask placeholder -->
+        <path d="M10 4 C 10 2, 12 2, 13 4 L 14 18 C 14 20, 12 22, 12 24 L 14 38 C 14 40, 12 42, 10 42 C 8 42, 6 40, 7 38 L 8 24 C 8 22, 7 20, 7 18 L 8 4 C 8 2, 10 2, 10 4 Z" fill="#C46B2D"/>
+        <path d="M22 6 C 22 4, 24 4, 25 6 L 26 20 C 26 22, 24 24, 24 26 L 26 38 C 26 40, 24 42, 22 42 C 20 42, 18 40, 19 38 L 20 26 C 20 24, 19 22, 19 20 L 20 6 C 20 4, 22 4, 22 6 Z" fill="#E0944D"/>
+      </svg>
+      <span class="brand-text">
+        <div class="brand-name">Black Heritage Gallery</div>
+      </span>
+    </a>
+    <nav class="nav-links" aria-label="Main">
+      <a href="#top" class="is-active">Home</a>
+      <a href="#about">About</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#artists">Artists</a>
+      <a href="#shop">Shop</a>
+      <a href="#appraisal" style="color: var(--accent);">Appraisal Services</a>
+    </nav>
+    <div class="nav-actions">
+      <button type="button" class="nav-icon-btn" id="nav-login" aria-label="Account">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+        <span class="nav-icon-label">Sign in</span>
+      </button>
+      <button type="button" class="nav-icon-btn" id="nav-cart" aria-label="Cart" aria-expanded="false">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+        <span class="nav-icon-label">Cart</span>
+        <span class="cart-pip" id="cart-pip">2</span>
+      </button>
+      <a href="#community" class="btn btn-primary">Join Community</a>
+    </div>
+  </div>
+
+  <!-- ============== CART DRAWER ============== -->
+  <div class="drawer-scrim" id="drawer-scrim" aria-hidden="true"></div>
+  <aside class="cart-drawer" id="cart-drawer" aria-hidden="true" aria-label="Your cart">
+    <header class="cart-drawer-head">
+      <div>
+        <h3>Your cart</h3>
+        <div class="cart-drawer-sub" id="cart-line-count">2 items</div>
+      </div>
+      <button type="button" class="drawer-close" id="cart-close" aria-label="Close cart">
+        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+      </button>
+    </header>
+
+    <div class="cart-items" id="cart-items">
+      <!-- populated by JS -->
+    </div>
+
+    <div class="cart-empty" id="cart-empty" hidden>
+      <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.4" style="opacity:.4"><circle cx="9" cy="21" r="1"/><circle cx="20" cy="21" r="1"/><path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"/></svg>
+      <p>Your cart is empty.</p>
+      <button type="button" class="btn btn-ghost" id="cart-empty-cta">Browse the shop</button>
+    </div>
+
+    <footer class="cart-foot" id="cart-foot">
+      <div class="cart-row">
+        <span>Subtotal</span>
+        <span class="cart-subtotal" id="cart-subtotal">$0.00</span>
+      </div>
+      <div class="cart-row cart-row-sub">
+        <span>Shipping</span>
+        <span>Calculated at checkout</span>
+      </div>
+      <button type="button" class="btn btn-primary btn-lg cart-checkout">
+        Checkout
+        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </button>
+      <a href="#" class="cart-continue" id="cart-continue-link">Continue shopping</a>
+    </footer>
+  </aside>
+
+  <!-- ============== SIGN-IN MODAL ============== -->
+  <div class="modal-scrim" id="modal-scrim" aria-hidden="true"></div>
+  <div class="auth-modal" id="auth-modal" role="dialog" aria-modal="true" aria-labelledby="auth-title" aria-hidden="true">
+    <button type="button" class="drawer-close auth-close" id="auth-close" aria-label="Close">
+      <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"/><line x1="6" y1="6" x2="18" y2="18"/></svg>
+    </button>
+
+    <div class="auth-tabs" role="tablist">
+      <button type="button" class="auth-tab is-active" data-auth-tab="signin" role="tab">Sign in</button>
+      <button type="button" class="auth-tab" data-auth-tab="signup" role="tab">Create account</button>
+    </div>
+
+    <div class="auth-pane" data-auth-pane="signin">
+      <div class="auth-eyebrow">Welcome back</div>
+      <h3 id="auth-title">Sign in to your gallery account</h3>
+      <p class="auth-sub">Track orders, save favorites, and access exclusive collector previews.</p>
+
+      <form class="auth-form" onsubmit="event.preventDefault(); document.getElementById('auth-success').hidden = false; document.getElementById('auth-form-signin').hidden = true;" id="auth-form-signin">
+        <div class="form-row">
+          <label>Email</label>
+          <input type="email" placeholder="you@email.com" required autocomplete="email" />
+        </div>
+        <div class="form-row">
+          <div class="form-row-flex">
+            <label>Password</label>
+            <a href="#" class="form-row-aux">Forgot password?</a>
+          </div>
+          <input type="password" placeholder="••••••••" required autocomplete="current-password" />
+        </div>
+        <label class="remember-row">
+          <span class="checkbox is-on"><span class="checkbox-mark"></span></span>
+          <span>Keep me signed in on this device</span>
+        </label>
+        <button type="submit" class="btn btn-primary btn-lg auth-submit">Sign in</button>
+
+        <div class="auth-or"><span>or</span></div>
+
+        <div class="auth-social">
+          <button type="button" class="auth-social-btn">
+            <svg width="18" height="18" viewBox="0 0 24 24"><path d="M12 11v3.2h4.5c-.18 1.16-1.32 3.4-4.5 3.4-2.71 0-4.92-2.24-4.92-5s2.21-5 4.92-5c1.54 0 2.57.66 3.16 1.22l2.16-2.08C15.95 5.4 14.18 4.6 12 4.6 7.79 4.6 4.4 7.99 4.4 12.2s3.39 7.6 7.6 7.6c4.39 0 7.3-3.08 7.3-7.42 0-.5-.06-.88-.13-1.18z" fill="#4285F4"/></svg>
+            Continue with Google
+          </button>
+          <button type="button" class="auth-social-btn">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M16.5 2c.1 1.2-.4 2.4-1.1 3.2-.7.8-1.9 1.5-3 1.4-.1-1.2.4-2.4 1.1-3.2.7-.9 2-1.5 3-1.4zM20 17.4c-.5 1.2-.8 1.8-1.5 2.9-1 1.5-2.4 3.4-4.1 3.4-1.5 0-1.9-1-4-1-2 0-2.5 1-4 1-1.7 0-3-1.7-4-3.2-2.7-4.1-3-9-1.3-11.6 1.2-1.9 3.1-3 4.9-3 1.8 0 3 1 4.5 1s2.4-1 4.5-1c1.6 0 3.3.9 4.5 2.4-3.9 2.2-3.3 7.9.5 9.1z"/></svg>
+            Continue with Apple
+          </button>
+        </div>
+      </form>
+
+      <div class="auth-success" id="auth-success" hidden>
+        <div class="auth-success-icon">
+          <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><polyline points="20 6 9 17 4 12"/></svg>
+        </div>
+        <h4>You're signed in.</h4>
+        <p>Welcome back to Black Heritage Gallery. Your collector account is ready.</p>
+        <button type="button" class="btn btn-primary btn-lg" id="auth-success-close">Continue</button>
+      </div>
+    </div>
+
+    <div class="auth-pane" data-auth-pane="signup" hidden>
+      <div class="auth-eyebrow">Become a collector</div>
+      <h3>Create your gallery account</h3>
+      <p class="auth-sub">Save artworks, get appraisal updates, and unlock first looks at new collections.</p>
+
+      <form class="auth-form" onsubmit="event.preventDefault(); alert('Account created (demo).');">
+        <div class="form-row form-row-2col">
+          <div>
+            <label>First name</label>
+            <input type="text" placeholder="Jane" required />
+          </div>
+          <div>
+            <label>Last name</label>
+            <input type="text" placeholder="Mensah" required />
+          </div>
+        </div>
+        <div class="form-row">
+          <label>Email</label>
+          <input type="email" placeholder="you@email.com" required />
+        </div>
+        <div class="form-row">
+          <label>Password</label>
+          <input type="password" placeholder="At least 8 characters" required minlength="8" />
+        </div>
+        <label class="remember-row">
+          <span class="checkbox is-on"><span class="checkbox-mark"></span></span>
+          <span>Email me about new exhibitions and artist spotlights</span>
+        </label>
+        <button type="submit" class="btn btn-primary btn-lg auth-submit">Create account</button>
+        <p class="auth-fineprint">By creating an account you agree to our <a href="#">Terms of Use</a> and <a href="#">Privacy Policy</a>.</p>
+      </form>
+    </div>
+  </div>
+
+</header>
+
+<!-- ============== HERO ============== -->
+<section class="hero" id="top" data-screen-label="01 Hero">
+  <div class="container">
+    <div class="hero-grid">
+      <div>
+        <svg class="hero-eyebrow-mark" viewBox="0 0 56 64" fill="none" aria-hidden="true">
+          <path d="M16 6 C 16 3, 19 3, 20 6 L 22 26 C 22 29, 18 32, 18 35 L 20 56 C 20 59, 18 62, 15 62 C 12 62, 10 59, 11 56 L 13 35 C 13 32, 9 29, 9 26 L 11 6 C 11 3, 14 3, 14 6 Z" fill="#C46B2D"/>
+          <path d="M36 8 C 36 5, 39 5, 40 8 L 42 28 C 42 31, 38 34, 38 37 L 40 56 C 40 59, 38 62, 35 62 C 32 62, 30 59, 31 56 L 33 37 C 33 34, 29 31, 29 28 L 31 8 C 31 5, 34 5, 34 8 Z" fill="#E0944D"/>
+        </svg>
+        <h1>The Black Heritage<br/>Gallery <span class="accent">Returns</span></h1>
+        <h2 class="sub">Join Our Community</h2>
+        <p class="lede">Celebrating Black art and the voices of Black &amp; African artists</p>
+        <div class="hero-cta">
+          <a href="#about" class="btn btn-primary btn-lg">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 3h6a4 4 0 0 1 4 4v14a3 3 0 0 0-3-3H2z"/><path d="M22 3h-6a4 4 0 0 0-4 4v14a3 3 0 0 1 3-3h7z"/></svg>
+            Learn Our Story
+          </a>
+          <a href="#appraisal" class="btn btn-ghost btn-lg">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1 0 2.83 2 2 0 0 1-2.83 0l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4"/></svg>
+            Appraisal Services
+          </a>
+        </div>
+      </div>
+      <div style="position:relative;">
+        <div class="hero-art">
+          <div class="hero-art-img"></div>
+          <div class="hero-art-caption">Contemporary African Expression</div>
+        </div>
+        <div class="hero-dots">
+          <span class="is-active"></span>
+          <span></span>
+          <span></span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== CHRISTMAS / SEASONAL FEATURE (NEW) ============== -->
+<section class="feature-strip section" data-screen-label="02 Seasonal feature">
+  <div class="container">
+    <div class="feature-grid">
+      <div class="feature-art">
+        <span class="feature-art-tag">Featured · Holiday Collection</span>
+      </div>
+      <div>
+        <div style="font-family: var(--font-body); font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase; color: var(--accent); font-weight: 600; margin-bottom: 14px;">Seasonal Collection</div>
+        <h2>Celebrate Christmas Our Way</h2>
+        <p>Discover ornaments, cards, and holiday décor that honor Black traditions and the artists keeping them alive.</p>
+        <a href="#shop" class="btn btn-dark btn-lg" style="border-radius: 0;">Shop Christmas Collection</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== ABOUT / HERITAGE & MISSION ============== -->
+<section class="heritage section" id="about" data-screen-label="03 Heritage & Mission">
+  <div class="container">
+    <div class="heritage-grid">
+      <div class="heritage-photo" aria-label="Robbie Lee, founder"></div>
+      <div>
+        <div class="heritage-rule"></div>
+        <h2>Our Heritage &amp; Mission</h2>
+        <p>Founded by renowned art expert <strong>Robbie Lee</strong>, the Black Heritage Gallery has been a cornerstone of our community's artistic legacy for over three decades.</p>
+        <p>Robbie Lee's extensive background in art history and appraisal, combined with deep connections to Black and African artistic communities, established our gallery as a trusted space for both emerging and established artists.</p>
+        <p>Today, as a second-generation family business, we continue this legacy of celebrating Black art and amplifying the voices of Black &amp; African artists, while providing professional appraisal services to collectors and institutions worldwide.</p>
+        <div class="heritage-quote">
+          "Art is the bridge between cultures, and our gallery serves as that bridge, connecting communities through the powerful expressions of Black and African artists."
+          <span class="heritage-quote-attr">— Robbie Lee, Founder</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== FEATURED COLLECTIONS (original) ============== -->
+<section class="collections-bg section" id="gallery" data-screen-label="04 Featured Collections">
+  <div class="container-wide">
+    <div class="section-head">
+      <h2>Featured Collections</h2>
+      <p>Discover our curated collection of exceptional Black and African art, spanning traditional and contemporary expressions</p>
+      <hr class="section-rule" />
+    </div>
+    <div class="collections-grid">
+      <div class="collection-card">
+        <div class="collection-thumb collection-thumb-1"></div>
+        <div class="collection-meta">
+          <h4>Rhythms of Heritage</h4>
+          <div class="cat">Contemporary Mixed Media</div>
+        </div>
+      </div>
+      <div class="collection-card">
+        <div class="collection-thumb collection-thumb-2"></div>
+        <div class="collection-meta">
+          <h4>Ancestral Wisdom</h4>
+          <div class="cat">Traditional Carved Wood</div>
+        </div>
+      </div>
+      <div class="collection-card">
+        <div class="collection-thumb collection-thumb-3"></div>
+        <div class="collection-meta">
+          <h4>Woven Stories</h4>
+          <div class="cat is-accent">Hand-woven Textile</div>
+        </div>
+      </div>
+      <div class="collection-card">
+        <div class="collection-thumb collection-thumb-4"></div>
+        <div class="collection-meta">
+          <h4>Liberation Form</h4>
+          <div class="cat">Contemporary Sculpture</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== FEATURED ARTISTS (NEW) ============== -->
+<section class="section" id="artists" data-screen-label="05 Featured Artists">
+  <div class="container-wide">
+    <div class="section-head">
+      <h2>Featured Artists</h2>
+      <p>Galleries dedicated to the lifework of artists shaping Black and African visual culture</p>
+      <hr class="section-rule" />
+    </div>
+    <div class="artists-grid">
+      <a href="#" class="artist-card" style="border:0;">
+        <div class="artist-thumb a1"></div>
+        <div class="artist-name">D.D. Ike Art Gallery</div>
+        <div class="artist-medium">Mixed Media · Jazz</div>
+      </a>
+      <a href="#" class="artist-card" style="border:0;">
+        <div class="artist-thumb a2"></div>
+        <div class="artist-name">Michael Wallace Art Gallery</div>
+        <div class="artist-medium">Cubist Portraiture</div>
+      </a>
+      <a href="#" class="artist-card" style="border:0;">
+        <div class="artist-thumb a3"></div>
+        <div class="artist-name">Ted Ellis Art Gallery</div>
+        <div class="artist-medium">Cultural Narrative</div>
+      </a>
+      <a href="#" class="artist-card" style="border:0;">
+        <div class="artist-thumb a4"></div>
+        <div class="artist-name">Ernie Barnes Art Gallery</div>
+        <div class="artist-medium">Neo-Mannerism</div>
+      </a>
+      <a href="#" class="artist-card" style="border:0;">
+        <div class="artist-thumb a5"></div>
+        <div class="artist-name">Gerald Ivey Art Gallery</div>
+        <div class="artist-medium">Abstract Figuration</div>
+      </a>
+    </div>
+  </div>
+</section>
+
+<!-- ============== SHOP BY (NEW: Occasion / Theme / Type) ============== -->
+<section class="shopby" data-screen-label="06 Shop by">
+  <div class="shopby-grid">
+    <div class="shopby-1 shopby-card">
+      <div class="shopby-content">
+        <div class="shopby-card-inner">
+          <h3>Shop by Occasion</h3>
+          <p>Christmas, Mother's Day, Father's Day, Weddings, and more.</p>
+          <a href="#" class="btn">Browse Collections</a>
+        </div>
+      </div>
+    </div>
+    <div class="shopby-2 shopby-card">
+      <div class="shopby-content">
+        <div class="shopby-card-inner">
+          <h3>Shop by Theme</h3>
+          <p>Religious, Black History, Organizations, Family, Professionals.</p>
+          <a href="#" class="btn">Browse Collections</a>
+        </div>
+      </div>
+    </div>
+    <div class="shopby-3 shopby-card">
+      <div class="shopby-content">
+        <div class="shopby-card-inner">
+          <h3>Shop by Type</h3>
+          <p>Artwork, Home Décor, Stationery, Fashion, African Décor &amp; Fashion.</p>
+          <a href="#" class="btn">Browse Collections</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== APPRAISAL (original) ============== -->
+<section class="appraisal-bg section" id="appraisal" data-screen-label="07 Appraisal Services">
+  <div class="container">
+    <div class="section-head">
+      <h2>Professional Appraisal Services</h2>
+      <p>Trusted expertise in valuing Black and African art, with decades of experience and industry recognition</p>
+      <hr class="section-rule" />
+    </div>
+    <div class="appraisal-grid">
+      <div>
+        <div class="credentials-card">
+          <h3>
+            <span class="credentials-icon">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2" y="6" width="20" height="14" rx="2"/><path d="M2 10h20"/></svg>
+            </span>
+            Robbie Lee's Credentials
+          </h3>
+          <div class="credential-item">
+            <svg class="credential-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><polyline points="8 14 5 22 12 18 19 22 16 14"/></svg>
+            <div>
+              <div class="credential-item-title">Certified Art Appraiser</div>
+              <div class="credential-item-desc">American Society of Appraisers (ASA) certified</div>
+            </div>
+          </div>
+          <div class="credential-item">
+            <svg class="credential-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 10v6M2 10l10-5 10 5-10 5z"/><path d="M6 12v5c3 3 9 3 12 0v-5"/></svg>
+            <div>
+              <div class="credential-item-title">Academic Background</div>
+              <div class="credential-item-desc">M.A. in Art History, specializing in African and African-American Art</div>
+            </div>
+          </div>
+          <div class="credential-item">
+            <svg class="credential-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><polyline points="8 14 5 22 12 18 19 22 16 14"/></svg>
+            <div>
+              <div class="credential-item-title">Professional Experience</div>
+              <div class="credential-item-desc">30+ years in art authentication and valuation</div>
+            </div>
+          </div>
+          <div class="credential-item">
+            <svg class="credential-item-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 22V8l9-5 9 5v14"/><path d="M3 22h18"/><path d="M9 22v-7h6v7"/></svg>
+            <div>
+              <div class="credential-item-title">Museum Partnerships</div>
+              <div class="credential-item-desc">Collaborations with major cultural institutions</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="process-card">
+          <h3>Our Process</h3>
+          <div class="process-step"><span class="step-num">1</span><span>Initial consultation and artwork documentation</span></div>
+          <div class="process-step"><span class="step-num">2</span><span>Research and provenance verification</span></div>
+          <div class="process-step"><span class="step-num">3</span><span>Market analysis and comparative evaluation</span></div>
+          <div class="process-step"><span class="step-num">4</span><span>Detailed appraisal report delivery</span></div>
+        </div>
+      </div>
+
+      <form class="form-card" onsubmit="event.preventDefault(); alert('Appraisal request submitted (demo).');">
+        <h3>Request an Appraisal</h3>
+        <div class="form-row">
+          <label>Full Name <span class="req">*</span></label>
+          <input type="text" placeholder="Enter your full name" required />
+        </div>
+        <div class="form-row">
+          <label>Email Address <span class="req">*</span></label>
+          <input type="email" placeholder="your@email.com" required />
+        </div>
+        <div class="form-row">
+          <label>Phone Number</label>
+          <input type="tel" placeholder="Enter your phone number" />
+        </div>
+        <div class="form-row">
+          <label>Artwork Description <span class="req">*</span></label>
+          <textarea placeholder="Please describe your artwork including artist name, medium, dimensions, condition, and any known provenance…" required></textarea>
+        </div>
+        <div class="form-row">
+          <label>Purpose of Appraisal</label>
+          <select>
+            <option>Select purpose</option>
+            <option>Insurance valuation</option>
+            <option>Estate planning</option>
+            <option>Sale or donation</option>
+            <option>Authentication</option>
+          </select>
+        </div>
+        <div class="form-row submit-row">
+          <button type="submit" class="btn btn-primary">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+            Submit Appraisal Request
+          </button>
+          <div class="form-foot">We'll respond within 2–3 business days with next steps and pricing information.</div>
+        </div>
+      </form>
+    </div>
+  </div>
+</section>
+
+<!-- ============== REVIEWS (NEW) ============== -->
+<section class="reviews-bg section" id="reviews" data-screen-label="08 Reviews">
+  <div class="container">
+    <div class="reviews-head">
+      <h2>Real Reviews from Real Customers</h2>
+      <div class="reviews-meta">
+        <span class="stars-row" aria-label="4.8 out of 5">
+          <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 8.5 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 8.5"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 8.5 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 8.5"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 8.5 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 8.5"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 8.5 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 8.5"/></svg>
+          <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 8.5 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 8.5"/></svg>
+        </span>
+        <span class="review-count">16,469 Reviews</span>
+        <span class="review-arrow" aria-label="Previous">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+        </span>
+        <span class="review-arrow" aria-label="Next">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        </span>
+      </div>
+    </div>
+
+    <div class="reviews-grid">
+      <div class="review-card">
+        <div class="review-stars-line">
+          <span class="stars-row">
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 8.5 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 8.5"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 8.5 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 8.5"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 8.5 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 8.5"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 8.5 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 8.5"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 8.5 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 8.5"/></svg>
+          </span>
+          <span class="review-date">04 / 14 / 2026</span>
+        </div>
+        <div class="review-body-row">
+          <div>
+            <div class="review-thumb rt-1"></div>
+            <div class="review-thumb-cap"><a href="#">Abeke Madagascar Big Brim Raffia Sun Hat</a></div>
+          </div>
+          <div>
+            <p class="review-text">"Sassy hat, stylish!"</p>
+            <div class="review-author">Vanady</div>
+            <div class="verified-badge">Verified buyer</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-stars-line">
+          <span class="stars-row">
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 8.5 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 8.5"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 8.5 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 8.5"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 8.5 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 8.5"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 8.5 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 8.5"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 8.5 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 8.5"/></svg>
+          </span>
+          <span class="review-date">04 / 17 / 2026</span>
+        </div>
+        <div class="review-body-row">
+          <div>
+            <div class="review-thumb rt-2"></div>
+            <div class="review-thumb-cap"><a href="#">Feelin' Good — The Bassist</a></div>
+          </div>
+          <div>
+            <p class="review-text"><strong>Feelin' Good</strong>The picture is a beautiful piece of art.</p>
+            <div class="review-author">Michael R.</div>
+            <div class="verified-badge">Verified buyer</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="review-card">
+        <div class="review-stars-line">
+          <span class="stars-row">
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 8.5 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 8.5"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 8.5 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 8.5"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 8.5 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 8.5"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 8.5 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 8.5"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 8.5 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 8.5"/></svg>
+          </span>
+          <span class="review-date">04 / 04 / 2026</span>
+        </div>
+        <div class="review-body-row">
+          <div>
+            <div class="review-thumb rt-3"></div>
+            <div class="review-thumb-cap"><a href="#">Mama Queen</a></div>
+          </div>
+          <div>
+            <p class="review-text">"Absolutely beautiful!!!"</p>
+            <div class="review-author">Teresa</div>
+            <div class="verified-badge">Verified buyer</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== TOP RATED PRODUCTS (NEW) ============== -->
+<section class="products-bg section" id="shop" data-screen-label="09 Top Rated Products">
+  <div class="container-wide">
+    <div class="reviews-head">
+      <h2>Top Rated Products</h2>
+      <div>
+        <span class="review-arrow" aria-label="Previous">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="15 18 9 12 15 6"/></svg>
+        </span>
+        <span class="review-arrow" aria-label="Next" style="margin-left: 8px;">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="9 18 15 12 9 6"/></svg>
+        </span>
+      </div>
+    </div>
+
+    <div class="products-grid">
+      <div class="product-card">
+        <div class="product-thumb pt-1"></div>
+        <div class="product-meta">
+          <div class="product-name">The Thinker Short Sleeve Unisex T-Shirt</div>
+          <div class="product-stars">
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 8.5 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 8.5"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 8.5 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 8.5"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 8.5 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 8.5"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 8.5 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 8.5"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 8.5 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 8.5"/></svg>
+            <span>(136)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-thumb pt-2"></div>
+        <div class="product-meta">
+          <div class="product-name">The Last Supper</div>
+          <div class="product-stars">
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 8.5 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 8.5"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 8.5 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 8.5"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 8.5 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 8.5"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 8.5 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 8.5"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 8.5 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 8.5"/></svg>
+            <span>(103)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-thumb pt-3"></div>
+        <div class="product-meta">
+          <div class="product-name">Soul on Fire Interior Floor Mat</div>
+          <div class="product-stars">
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 8.5 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 8.5"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 8.5 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 8.5"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 8.5 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 8.5"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 8.5 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 8.5"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 8.5 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 8.5"/></svg>
+            <span>(80)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-thumb pt-4"></div>
+        <div class="product-meta">
+          <div class="product-name">Funeral Procession</div>
+          <div class="product-stars">
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 8.5 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 8.5"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 8.5 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 8.5"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 8.5 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 8.5"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 8.5 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 8.5"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 8.5 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 8.5"/></svg>
+            <span>(79)</span>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-card">
+        <div class="product-thumb pt-5"></div>
+        <div class="product-meta">
+          <div class="product-name">Life on Purpose Interior Floor Mat</div>
+          <div class="product-stars">
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 8.5 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 8.5"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 8.5 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 8.5"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 8.5 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 8.5"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 8.5 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 8.5"/></svg>
+            <svg viewBox="0 0 24 24" fill="currentColor"><polygon points="12 2 15 8.5 22 9.3 17 14 18.5 21 12 17.5 5.5 21 7 14 2 9.3 9 8.5"/></svg>
+            <span>(74)</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ============== COMMUNITY (original) ============== -->
+<section class="community-bg community" id="community" data-screen-label="10 Join Community">
+  <div class="container">
+    <h2>Join Our Community</h2>
+    <p class="lede">Stay connected with upcoming exhibitions, artist spotlights, and gallery news</p>
+    <div class="community-card">
+      <div class="email-row">
+        <input type="email" placeholder="Enter your email address" />
+        <button class="send-btn" aria-label="Send">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        </button>
+      </div>
+      <div class="interests-label">What interests you? (Optional)</div>
+      <div class="interests-grid" id="interests">
+        <label class="interest-row is-on"><span class="checkbox"></span> Gallery Exhibitions</label>
+        <label class="interest-row is-on"><span class="checkbox"></span> Artist Spotlights</label>
+        <label class="interest-row"><span class="checkbox"></span> Community Events</label>
+        <label class="interest-row"><span class="checkbox"></span> Appraisal Updates</label>
+      </div>
+      <button class="join-btn">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+        Join Community
+      </button>
+      <p class="privacy">We respect your privacy. Unsubscribe anytime.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ============== EXPANDED FOOTER (NEW) ============== -->
+<footer class="footer" data-screen-label="11 Footer">
+  <div class="container-wide">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="footer-brand">
+          <svg class="footer-brand-mark" viewBox="0 0 32 38" fill="none">
+            <path d="M9 4 C 9 2, 11 2, 12 4 L 13 16 C 13 18, 11 20, 11 21 L 13 34 C 13 36, 11 37, 9 37 C 7 37, 5 36, 6 34 L 7 21 C 7 20, 6 18, 6 16 L 7 4 C 7 2, 9 2, 9 4 Z" fill="#C46B2D"/>
+            <path d="M21 6 C 21 4, 23 4, 24 6 L 25 18 C 25 20, 23 22, 23 23 L 25 34 C 25 36, 23 37, 21 37 C 19 37, 17 36, 18 34 L 19 23 C 19 22, 18 20, 18 18 L 19 6 C 19 4, 21 4, 21 6 Z" fill="#E0944D"/>
+          </svg>
+          <span class="footer-brand-name">Black Heritage Gallery</span>
+        </div>
+        <p class="footer-blurb">Celebrating Black art and the voices of Black &amp; African artists for over three decades.</p>
+        <div style="font-family: var(--font-body); font-size: 13px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: #fff; margin-bottom: 12px;">Follow Us</div>
+        <div class="socials">
+          <a href="#" aria-label="Instagram"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="3" y="3" width="18" height="18" rx="5"/><circle cx="12" cy="12" r="4"/><circle cx="17.5" cy="6.5" r="0.6" fill="currentColor"/></svg></a>
+          <a href="#" aria-label="Facebook"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg></a>
+          <a href="#" aria-label="Twitter"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M22 5.8a8.5 8.5 0 0 1-2.36.64 4.13 4.13 0 0 0 1.81-2.27 8.21 8.21 0 0 1-2.61 1A4.1 4.1 0 0 0 11.5 9.4a11.65 11.65 0 0 1-8.46-4.29 4.1 4.1 0 0 0 1.27 5.49A4.07 4.07 0 0 1 2.4 10v.05a4.1 4.1 0 0 0 3.29 4.02 4.07 4.07 0 0 1-1.85.07 4.11 4.11 0 0 0 3.83 2.85A8.23 8.23 0 0 1 2 18.41 11.62 11.62 0 0 0 8.29 20c7.55 0 11.68-6.25 11.68-11.67v-.53A8.34 8.34 0 0 0 22 5.8z"/></svg></a>
+          <a href="#" aria-label="Pinterest"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M12 2a10 10 0 0 0-3.6 19.32c-.06-.78-.13-2 .03-2.86l1.13-4.79s-.29-.58-.29-1.43c0-1.34.78-2.34 1.74-2.34.82 0 1.22.62 1.22 1.36 0 .83-.53 2.07-.8 3.22-.23.96.48 1.74 1.43 1.74 1.71 0 3.03-1.81 3.03-4.42 0-2.31-1.66-3.92-4.04-3.92-2.75 0-4.36 2.06-4.36 4.19 0 .83.32 1.72.72 2.21.08.1.09.18.07.28l-.27 1.1c-.04.18-.14.22-.33.13-1.22-.57-1.99-2.36-1.99-3.79 0-3.09 2.24-5.93 6.46-5.93 3.39 0 6.03 2.42 6.03 5.65 0 3.37-2.13 6.08-5.08 6.08a2.62 2.62 0 0 1-2.25-1.13l-.61 2.34c-.22.86-.82 1.93-1.22 2.59A10 10 0 1 0 12 2z"/></svg></a>
+          <a href="#" aria-label="LinkedIn"><svg viewBox="0 0 24 24" fill="currentColor"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM6 9H2v12h4zM4 6a2 2 0 1 0 0-4 2 2 0 0 0 0 4z"/></svg></a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <h5>Shop With Us</h5>
+        <a href="#">Account</a>
+        <a href="#">Christmas Cards</a>
+        <a href="#">Santa Claus Figurines</a>
+        <a href="#">Black History Collection</a>
+        <a href="#">D.D. Ike Art Gallery</a>
+        <a href="#">Jigsaw Puzzles</a>
+        <a href="#">Blog</a>
+        <a href="#">Reviews: What Our Customers Say</a>
+      </div>
+
+      <div class="footer-col">
+        <h5>Policies</h5>
+        <a href="#">Submit Your Artwork</a>
+        <a href="#">Frequently Asked Questions</a>
+        <a href="#">Easy Returns</a>
+        <a href="#">A Special Note About Limited Editions</a>
+        <a href="#">Sponsored Newsletters</a>
+        <a href="#">Accessibility Statement</a>
+        <a href="#">Terms of Use</a>
+        <a href="#">Layaway Plans &amp; Policies</a>
+        <a href="#">Pricing Verification</a>
+      </div>
+
+      <div class="footer-col">
+        <h5>Contact Us</h5>
+        <div class="footer-contact-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+          <span>154 Selig Drive Southwest<br/>Suite A · Atlanta, GA 30336</span>
+        </div>
+        <div class="footer-contact-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72c.13.96.37 1.9.72 2.81a2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45c.91.35 1.85.59 2.81.72A2 2 0 0 1 22 16.92z"/></svg>
+          <a href="tel:6789166545" style="color:inherit; text-decoration: underline; border:0;">678-916-6545</a>
+        </div>
+        <div class="footer-contact-item">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          <a href="mailto:hello@blackheritagegallery.com" style="color:inherit; text-decoration: underline; border:0;">Email us</a>
+        </div>
+      </div>
+
+      <div class="footer-col">
+        <div class="verified-pill">
+          <span class="num">16,469</span>
+          <div class="stars-tiny">★★★★★</div>
+          <div class="ribbon">Verified Reviews</div>
+        </div>
+
+        <div style="margin-top: 32px;">
+          <div style="font-family: var(--font-body); font-weight: 700; color: #fff; font-size: 12px; letter-spacing: 0.12em; text-transform: uppercase;">Atlanta</div>
+          <div style="font-family: var(--font-body); font-size: 12px; color: rgba(255,255,255,0.55); margin-top: 4px;">Member · Metropolitan Chamber of Commerce</div>
+        </div>
+
+        <div style="margin-top: 28px;">
+          <h5 style="margin-bottom: 10px;">Currency</h5>
+          <select class="currency-select">
+            <option>United States (USD $)</option>
+            <option>Canada (CAD $)</option>
+            <option>United Kingdom (GBP £)</option>
+            <option>Eurozone (EUR €)</option>
+          </select>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div>© 2026 Black Heritage Gallery. All rights reserved.</div>
+      <div>
+        <a href="#" style="color: inherit; padding-right: 18px;">Privacy</a>
+        <a href="#" style="color: inherit; padding-right: 18px;">Terms</a>
+        <a href="#" style="color: inherit;">Accessibility</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // Interest checkboxes (community)
+  document.querySelectorAll('.interest-row').forEach((row) => {
+    row.addEventListener('click', (e) => {
+      e.preventDefault();
+      row.classList.toggle('is-on');
+    });
+  });
+
+  // ---------- CART ----------
+  const cart = [
+    { id: 1, name: "Rhythms of Heritage", meta: "Limited print · 18 × 24 in", price: 285, qty: 1, thumb: "ci-1" },
+    { id: 2, name: "Ancestral Wisdom", meta: "Carved iroko wood · medium", price: 1240, qty: 1, thumb: "ci-2" },
+  ];
+
+  const $ = (s) => document.querySelector(s);
+  const cartItemsEl = $('#cart-items');
+  const cartEmptyEl = $('#cart-empty');
+  const cartFootEl = $('#cart-foot');
+  const cartPipEl = $('#cart-pip');
+  const cartLineCountEl = $('#cart-line-count');
+  const cartSubtotalEl = $('#cart-subtotal');
+
+  const fmt = (n) => '$' + n.toLocaleString('en-US', { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
+  function renderCart() {
+    cartItemsEl.innerHTML = '';
+    if (cart.length === 0) {
+      cartItemsEl.hidden = true;
+      cartEmptyEl.hidden = false;
+      cartFootEl.hidden = true;
+      cartPipEl.classList.remove('is-on');
+      cartLineCountEl.textContent = '0 items';
+      return;
+    }
+    cartItemsEl.hidden = false;
+    cartEmptyEl.hidden = true;
+    cartFootEl.hidden = false;
+
+    cart.forEach((item) => {
+      const row = document.createElement('div');
+      row.className = 'cart-item';
+      row.innerHTML = `
+        <div class="cart-item-thumb ${item.thumb}"></div>
+        <div class="cart-item-info">
+          <div class="cart-item-name">${item.name}</div>
+          <div class="cart-item-meta">${item.meta}</div>
+          <div class="qty-row">
+            <button type="button" class="qty-btn" data-act="dec" data-id="${item.id}" aria-label="Decrease">−</button>
+            <span class="qty-val">${item.qty}</span>
+            <button type="button" class="qty-btn" data-act="inc" data-id="${item.id}" aria-label="Increase">+</button>
+          </div>
+        </div>
+        <div class="cart-item-side">
+          <div class="cart-item-price">${fmt(item.price * item.qty)}</div>
+          <button type="button" class="cart-item-remove" data-act="remove" data-id="${item.id}">Remove</button>
+        </div>
+      `;
+      cartItemsEl.appendChild(row);
+    });
+
+    const totalQty = cart.reduce((s, i) => s + i.qty, 0);
+    const totalSub = cart.reduce((s, i) => s + i.qty * i.price, 0);
+    cartLineCountEl.textContent = totalQty + (totalQty === 1 ? ' item' : ' items');
+    cartSubtotalEl.textContent = fmt(totalSub);
+    cartPipEl.textContent = totalQty;
+    cartPipEl.classList.toggle('is-on', totalQty > 0);
+  }
+
+  cartItemsEl.addEventListener('click', (e) => {
+    const btn = e.target.closest('[data-act]');
+    if (!btn) return;
+    const id = parseInt(btn.dataset.id, 10);
+    const idx = cart.findIndex((i) => i.id === id);
+    if (idx < 0) return;
+    if (btn.dataset.act === 'inc') cart[idx].qty += 1;
+    if (btn.dataset.act === 'dec') {
+      cart[idx].qty -= 1;
+      if (cart[idx].qty <= 0) cart.splice(idx, 1);
+    }
+    if (btn.dataset.act === 'remove') cart.splice(idx, 1);
+    renderCart();
+  });
+
+  // Drawer open/close
+  const drawer = $('#cart-drawer');
+  const drawerScrim = $('#drawer-scrim');
+  function openCart() {
+    drawer.classList.add('is-open');
+    drawerScrim.classList.add('is-on');
+    drawer.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('lock-scroll');
+  }
+  function closeCart() {
+    drawer.classList.remove('is-open');
+    drawerScrim.classList.remove('is-on');
+    drawer.setAttribute('aria-hidden', 'true');
+    if (!authModal.classList.contains('is-open')) document.body.classList.remove('lock-scroll');
+  }
+  $('#nav-cart').addEventListener('click', openCart);
+  $('#cart-close').addEventListener('click', closeCart);
+  $('#cart-continue-link').addEventListener('click', (e) => { e.preventDefault(); closeCart(); });
+  $('#cart-empty-cta').addEventListener('click', closeCart);
+
+  // Initial render
+  renderCart();
+
+  // ---------- AUTH MODAL ----------
+  const authModal = $('#auth-modal');
+  const modalScrim = $('#modal-scrim');
+
+  function openAuth() {
+    authModal.classList.add('is-open');
+    modalScrim.classList.add('is-on');
+    authModal.setAttribute('aria-hidden', 'false');
+    document.body.classList.add('lock-scroll');
+  }
+  function closeAuth() {
+    authModal.classList.remove('is-open');
+    modalScrim.classList.remove('is-on');
+    authModal.setAttribute('aria-hidden', 'true');
+    if (!drawer.classList.contains('is-open')) document.body.classList.remove('lock-scroll');
+  }
+  $('#nav-login').addEventListener('click', openAuth);
+  $('#auth-close').addEventListener('click', closeAuth);
+
+  // Auth tab switching
+  document.querySelectorAll('.auth-tab').forEach((tab) => {
+    tab.addEventListener('click', () => {
+      const which = tab.dataset.authTab;
+      document.querySelectorAll('.auth-tab').forEach((t) => t.classList.toggle('is-active', t === tab));
+      document.querySelectorAll('[data-auth-pane]').forEach((p) => {
+        p.hidden = p.dataset.authPane !== which;
+      });
+      // reset success state when switching
+      $('#auth-success').hidden = true;
+      $('#auth-form-signin').hidden = false;
+    });
+  });
+
+  $('#auth-success-close').addEventListener('click', closeAuth);
+
+  // Remember-me toggle
+  document.querySelectorAll('.remember-row').forEach((row) => {
+    row.addEventListener('click', (e) => {
+      e.preventDefault();
+      row.querySelector('.checkbox').classList.toggle('is-on');
+    });
+  });
+
+  // Scrim closes whichever is open
+  drawerScrim.addEventListener('click', closeCart);
+  modalScrim.addEventListener('click', closeAuth);
+
+  // Esc key
+  window.addEventListener('keydown', (e) => {
+    if (e.key !== 'Escape') return;
+    if (drawer.classList.contains('is-open')) closeCart();
+    if (authModal.classList.contains('is-open')) closeAuth();
+  });
+</script>
+
+<script>
+  if ('serviceWorker' in navigator) {
+    window.addEventListener('load', () => {
+      navigator.serviceWorker.register('sw.js').catch((err) => console.warn('SW registration failed:', err));
+    });
+  }
+</script>
+
+</body>
+</html>

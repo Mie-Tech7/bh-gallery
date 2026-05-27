@@ -1,0 +1,132 @@
+rules_version = '2';
+
+service cloud.firestore {
+  match /databases/{database}/documents {
+
+    // ==========================================
+    // Helper functions
+    // ==========================================
+
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isOwner(userId) {
+      return isAuthenticated() && request.auth.uid == userId;
+    }
+
+    function isAdmin() {
+      return isAuthenticated()
+        && exists(/databases/$(database)/documents/users/$(request.auth.uid))
+        && get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'admin';
+    }
+
+    function isAdminOrOwner(userId) {
+      return isOwner(userId) || isAdmin();
+    }
+
+    // ==========================================
+    // Products (public read, admin write)
+    // ==========================================
+
+    match /products/{productId} {
+      allow read: if resource.data.isActive == true;
+      allow read, write: if isAdmin();
+    }
+
+    // ==========================================
+    // Orders (owner read, admin read/write)
+    // ==========================================
+
+    match /orders/{orderId} {
+      allow read: if isAdminOrOwner(resource.data.userId);
+      allow create: if isAuthenticated()
+        && request.resource.data.userId == request.auth.uid;
+      allow update: if isAdmin();
+      allow delete: if false; // Orders are never deleted
+    }
+
+    // ==========================================
+    // Users (owner read/write own profile, admin read all)
+    // ==========================================
+
+    match /users/{userId} {
+      allow read: if isAdminOrOwner(userId);
+      allow create: if isOwner(userId);
+      allow update: if isOwner(userId)
+        && !request.resource.data.diff(resource.data).affectedKeys().hasAny(['role']);
+      // Only admin can change roles (done via Admin SDK server-side)
+      allow update: if isAdmin();
+    }
+
+    // ==========================================
+    // User Collections (owner read/write, admin read, public if isPublic)
+    // ==========================================
+
+    match /user_collections/{userId}/items/{itemId} {
+      allow read: if isAdminOrOwner(userId)
+        || resource.data.isPublic == true;
+      allow create, update: if isOwner(userId);
+      allow delete: if isOwner(userId);
+      // Server-side (webhook) also writes here via Admin SDK
+    }
+
+    // ==========================================
+    // Artists (public read, admin write)
+    // ==========================================
+
+    match /artists/{artistId} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // ==========================================
+    // Reviews (public read approved, authenticated create, admin moderate)
+    // ==========================================
+
+    match /reviews/{reviewId} {
+      allow read: if resource.data.isApproved == true;
+      allow read: if isAdmin(); // Admin sees all including unapproved
+      allow create: if isAuthenticated()
+        && request.resource.data.userId == request.auth.uid
+        && request.resource.data.isApproved == false; // New reviews start unapproved
+      allow update: if isAdmin(); // Only admin approves/rejects
+      allow delete: if isAdmin();
+    }
+
+    // ==========================================
+    // Site Content / CMS (public read, admin write)
+    // ==========================================
+
+    match /site_content/{section} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // ==========================================
+    // Appraisal Requests (owner read own, admin read/write all)
+    // ==========================================
+
+    match /appraisal_requests/{requestId} {
+      allow read: if isAdmin()
+        || (isAuthenticated() && resource.data.userId == request.auth.uid);
+      allow create: if true; // Allow unauthenticated appraisal requests
+      allow update: if isAdmin();
+      allow delete: if false;
+    }
+
+    // ==========================================
+    // Newsletter Subscribers
+    // Create-only for unauthenticated. No read/update/delete except admin.
+    // ==========================================
+
+    match /newsletter_subscribers/{subscriberId} {
+      allow create: if true
+        && request.resource.data.keys().hasAll(['email', 'isActive', 'createdAt'])
+        && request.resource.data.email is string;
+      allow read: if isAdmin();
+      allow update: if isAdmin();
+      allow delete: if isAdmin();
+    }
+  }
+}

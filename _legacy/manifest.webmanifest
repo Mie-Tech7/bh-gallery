@@ -1,0 +1,19 @@
+{
+  "name": "Black Heritage Gallery",
+  "short_name": "BHG",
+  "description": "Celebrating Black art and the voices of Black & African artists",
+  "start_url": "/",
+  "scope": "/",
+  "display": "standalone",
+  "orientation": "portrait",
+  "background_color": "#F5F1EA",
+  "theme_color": "#C46B2D",
+  "icons": [
+    {
+      "src": "icon.svg",
+      "type": "image/svg+xml",
+      "sizes": "any",
+      "purpose": "any maskable"
+    }
+  ]
+}

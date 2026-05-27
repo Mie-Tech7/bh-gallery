@@ -1,0 +1,52 @@
+rules_version = '2';
+
+service firebase.storage {
+  match /b/{bucket}/o {
+
+    // Helper: check if user is authenticated
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    // Helper: check if user is admin (via custom claims)
+    function isAdmin() {
+      return isAuthenticated() && request.auth.token.admin == true;
+    }
+
+    // Product images: public read, admin write
+    match /products/{allPaths=**} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Artist images: public read, admin write
+    match /artists/{allPaths=**} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Site content images (hero, seasonal, etc.): public read, admin write
+    match /site_content/{allPaths=**} {
+      allow read: if true;
+      allow write: if isAdmin();
+    }
+
+    // Appraisal images: owner + admin read, authenticated write
+    match /appraisals/{requestId}/{allPaths=**} {
+      allow read: if isAdmin() || isAuthenticated();
+      allow write: if isAuthenticated();
+    }
+
+    // User collection images: owner write, conditional read
+    match /collections/{userId}/{allPaths=**} {
+      allow read: if isAuthenticated();
+      allow write: if isAuthenticated() && request.auth.uid == userId;
+    }
+
+    // Max file size: 10MB for images
+    match /{allPaths=**} {
+      allow write: if request.resource.size < 10 * 1024 * 1024
+        && request.resource.contentType.matches('image/.*');
+    }
+  }
+}
