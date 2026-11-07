@@ -12,6 +12,7 @@ const navLinks = [
   { label: 'Home', href: '/' },
   { label: 'About', href: '/about' },
   { label: 'Gallery', href: '/gallery' },
+  { label: 'Museum', href: '/gallery?view=museum' },
   { label: 'Artists', href: '/artists' },
   { label: 'Shop', href: '/shop' },
   { label: 'Appraisal Services', href: '/appraisal', accent: true },

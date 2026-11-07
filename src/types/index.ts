@@ -60,8 +60,23 @@ export interface Product {
     average: number;
     count: number;
   };
+  /**
+   * Optional extras for the 3D museum view. A product shows in the museum
+   * only when its tags include "museum".
+   */
+  museum?: ProductMuseumInfo;
   createdAt: Timestamp;
   updatedAt: Timestamp;
+}
+
+export interface ProductMuseumInfo {
+  featured?: boolean;
+  medium?: string;
+  dimensions?: string;
+  year?: string;
+  commentary?: string;
+  commentaryAudioUrl?: string;
+  commentaryBy?: string;
 }
 
 // ============================================

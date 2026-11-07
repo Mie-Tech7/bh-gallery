@@ -11,7 +11,8 @@
     "seed": "tsx --env-file=.env.local scripts/seed-firestore.ts",
     "firebase:emulators": "npx -y firebase-tools@latest emulators:start",
     "firebase:deploy:rules": "npx -y firebase-tools@latest deploy --only firestore:rules,storage",
-    "firebase:deploy:indexes": "npx -y firebase-tools@latest deploy --only firestore:indexes"
+    "firebase:deploy:indexes": "npx -y firebase-tools@latest deploy --only firestore:indexes",
+    "test": "vitest run"
   },
   "dependencies": {
     "clsx": "^2.1.1",
@@ -23,6 +24,7 @@
     "react-dom": "19.1.0",
     "react-hot-toast": "^2.6.0",
     "tailwind-merge": "^3.5.0",
+    "three": "0.170.0",
     "zustand": "^5.0.12"
   },
   "devDependencies": {
@@ -31,12 +33,14 @@
     "@types/node": "^20",
     "@types/react": "^19",
     "@types/react-dom": "^19",
+    "@types/three": "0.170.0",
     "eslint": "^9",
     "eslint-config-next": "15.5.15",
     "sharp": "^0.34.5",
     "svgo": "^4.0.1",
     "tailwindcss": "^4",
     "tsx": "^4.21.0",
-    "typescript": "^5"
+    "typescript": "^5",
+    "vitest": "3.2.4"
   }
 }
