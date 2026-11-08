@@ -9,18 +9,19 @@ import type { HeroContent } from '@/types';
 const DEFAULTS: HeroContent = {
   headline: 'The Black Heritage Gallery',
   headlineAccent: 'Returns',
-  subtitle: 'Join Our Community',
+  subtitle: 'Founded by Robbie Lee',
   tagline: 'Celebrating Black art and the voices of Black & African artists.',
   ctaPrimary: { text: 'Learn Our Story', link: '/about' },
-  ctaSecondary: { text: 'Appraisal Services', link: '/appraisal' },
+  ctaSecondary: { text: 'Appraisals', link: '/appraisal' },
+  // Slides stay as color panels until photos of her pieces are ready.
   carouselItems: [
-    { image: '', title: 'Contemporary African Expression', link: '/gallery' },
-    { image: '', title: 'Emerging Black Artists', link: '/artists' },
-    { image: '', title: 'Heritage Art Treasures', link: '/shop' },
+    { image: '', title: '[ADD: photo of a piece from the collection]', link: '/' },
+    { image: '', title: '[ADD: photo of the gallery, then or now]', link: '/' },
+    { image: '', title: '[ADD: photo of a John Biggers piece she has handled]', link: '/' },
   ],
 };
 
-export function HeroSection({ content }: { content: HeroContent | null }) {
+export function HeroSection({ content }: { content?: HeroContent | null }) {
   const d = content || DEFAULTS;
   const items = d.carouselItems?.length ? d.carouselItems : DEFAULTS.carouselItems;
 

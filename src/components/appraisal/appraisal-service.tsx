@@ -1,24 +1,19 @@
 'use client';
 
 import { useState, useCallback } from 'react';
-import { Award, GraduationCap, Briefcase, Building2, Send, ClipboardCheck } from 'lucide-react';
+import { Award, Send, ClipboardCheck } from 'lucide-react';
 import { cn } from '@/lib/utils';
 import { createAppraisalRequest } from '@/lib/firebase/db';
 import type { AppraisalPurpose } from '@/types';
 import toast from 'react-hot-toast';
-
-const credentials = [
-  { icon: Award, title: 'Certified Art Appraiser', body: 'American Society of Appraisers (ASA) certified' },
-  { icon: GraduationCap, title: 'Academic Background', body: 'M.A. in Art History, specializing in African and African-American Art' },
-  { icon: Briefcase, title: 'Professional Experience', body: '30+ years in art authentication and valuation' },
-  { icon: Building2, title: 'Museum Partnerships', body: 'Collaborations with major cultural institutions' },
-];
+import { site, APPRAISAL_BRAND_COMING_SOON } from '@/content/site';
+import { Placeholder } from '@/components/ui/placeholder';
 
 const processSteps = [
-  'Initial consultation and artwork documentation',
-  'Research and provenance verification',
-  'Market analysis and comparative evaluation',
-  'Detailed appraisal report delivery',
+  'You describe the piece and why you need a value',
+  'We follow up for photos and any provenance you have',
+  'Research and comparison with recent sales',
+  'A written appraisal report',
 ];
 
 const purposeOptions: Array<{ value: AppraisalPurpose | ''; label: string }> = [
@@ -30,7 +25,8 @@ const purposeOptions: Array<{ value: AppraisalPurpose | ''; label: string }> = [
   { value: 'curiosity', label: 'Personal Knowledge' },
 ];
 
-export function AppraisalPreview() {
+export function AppraisalService() {
+  const brand = site.appraisalBrand.name;
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [phone, setPhone] = useState('');
@@ -70,56 +66,55 @@ export function AppraisalPreview() {
         appraisalReport: null,
         estimatedValue: null,
       });
-      toast.success('Appraisal request received — we\'ll be in touch within 2-3 business days.');
+      toast.success('Request received. We will email you with next steps.');
       setName(''); setEmail(''); setPhone(''); setDescription(''); setPurpose('');
       setErrors({});
     } catch (err) {
-      // Firestore may not be ready yet — log and still confirm to user so the UX works.
+      // Keep what they typed so they can try again.
       console.error('[Appraisal] createAppraisalRequest failed:', err);
-      toast.success('Appraisal request received — we\'ll be in touch within 2-3 business days.');
-      setName(''); setEmail(''); setPhone(''); setDescription(''); setPurpose('');
-      setErrors({});
+      toast.error('Your request did not go through. Please try again, or reach us through the Contact page.');
     } finally {
       setSubmitting(false);
     }
   }, [name, email, phone, description, purpose, validate]);
 
   return (
-    <section className="bg-bhg-cream-warm py-16 md:py-22" aria-label="Professional appraisal services">
+    <section className="bg-bhg-cream-warm py-16 md:py-22" aria-label="Appraisal services">
       <div className="container-bhg">
         <div className="text-center max-w-2xl mx-auto mb-12">
-          <h2 className="section-heading mb-4">Professional Appraisal Services</h2>
+          <h1 className="section-heading mb-4">Appraisals</h1>
           <p className="text-body-lg text-bhg-gray-600">
-            Trusted expertise in valuing Black and African art, with decades of experience and industry recognition
+            Appraisals are done by{' '}
+            {brand ? <strong className="text-bhg-black">{brand}</strong> : 'our family appraisal company'}, a separate
+            company founded by {site.founderName}{brand ? '' : ` (${APPRAISAL_BRAND_COMING_SOON})`}.
           </p>
           <div className="w-12 h-1 bg-bhg-copper mx-auto mt-6 rounded-full" aria-hidden="true"/>
         </div>
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-6xl mx-auto">
-          {/* Left: credentials + process */}
           <div className="space-y-6">
             <div className="rounded-card p-7 md:p-8 bg-gradient-to-br from-bhg-copper to-orange-700 text-white shadow-card">
-              <div className="flex items-center gap-3 mb-6">
+              <div className="flex items-center gap-3 mb-5">
                 <Award size={28} aria-hidden="true" className="text-white"/>
-                <h3 className="font-serif text-heading-lg">Robbie Lee&apos;s Credentials</h3>
+                <h2 className="font-serif text-heading-lg">Why a separate company</h2>
               </div>
-              <ul className="space-y-4">
-                {credentials.map(({ icon: Icon, title, body }) => (
-                  <li key={title} className="flex gap-3">
-                    <Icon size={20} aria-hidden="true" className="text-white/90 shrink-0 mt-0.5"/>
-                    <div>
-                      <p className="font-sans font-semibold text-body-md">{title}</p>
-                      <p className="text-body-sm text-white/85 leading-relaxed">{body}</p>
-                    </div>
-                  </li>
-                ))}
-              </ul>
+              <p className="text-body-md text-white/90 leading-relaxed mb-4">
+                {site.galleryName} shows and sells art. Valuing art is kept apart from selling it, so an
+                appraisal is never shaped by a sale.
+              </p>
+              <Placeholder block className="bg-white/90">fee policy (research suggests flat fees, never a percentage of value)</Placeholder>
+            </div>
+
+            <div className="card p-7 md:p-8">
+              <h2 className="font-serif text-heading-md text-bhg-black mb-4">About the appraiser</h2>
+              <p className="text-body-md text-bhg-gray-600 leading-relaxed mb-3">{site.founderName}</p>
+              <Placeholder block>credentials, years appraising and areas of expertise, once confirmed</Placeholder>
             </div>
 
             <div className="card p-7 md:p-8">
               <div className="flex items-center gap-3 mb-5">
                 <ClipboardCheck size={22} aria-hidden="true" className="text-bhg-copper"/>
-                <h3 className="font-serif text-heading-md text-bhg-black">Our Process</h3>
+                <h2 className="font-serif text-heading-md text-bhg-black">How it works</h2>
               </div>
               <ol className="space-y-3">
                 {processSteps.map((step, i) => (
@@ -136,7 +131,10 @@ export function AppraisalPreview() {
 
           {/* Right: request form */}
           <div className="card p-7 md:p-8 border border-bhg-gray-200">
-            <h3 className="font-serif text-heading-lg text-bhg-black mb-6">Request an Appraisal</h3>
+            <h2 className="font-serif text-heading-lg text-bhg-black mb-2">Request an appraisal</h2>
+            <p className="text-body-sm text-bhg-gray-600 mb-6">
+              Requests are handled by the family appraisal team, not the gallery&apos;s sales side.
+            </p>
             <form onSubmit={submit} className="space-y-4" noValidate>
               <div>
                 <label htmlFor="appraisal-name" className="block text-body-sm font-sans font-medium text-bhg-black mb-1.5">
@@ -245,7 +243,7 @@ export function AppraisalPreview() {
               </button>
 
               <p className="text-body-sm text-bhg-gray-600 text-center pt-1">
-                We&apos;ll respond within 2-3 business days with next steps and pricing information.
+                We&apos;ll reply by email with next steps and the fee.
               </p>
             </form>
           </div>

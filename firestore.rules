@@ -52,7 +52,10 @@ service cloud.firestore {
 
     match /users/{userId} {
       allow read: if isAdminOrOwner(userId);
-      allow create: if isOwner(userId);
+      // A new profile can only ever be a customer. Without this check anyone
+      // could sign up and write role: 'admin' into their own profile.
+      allow create: if isOwner(userId)
+        && request.resource.data.role == 'customer';
       allow update: if isOwner(userId)
         && !request.resource.data.diff(resource.data).affectedKeys().hasAny(['role']);
       // Only admin can change roles (done via Admin SDK server-side)
@@ -110,7 +113,28 @@ service cloud.firestore {
     match /appraisal_requests/{requestId} {
       allow read: if isAdmin()
         || (isAuthenticated() && resource.data.userId == request.auth.uid);
-      allow create: if true; // Allow unauthenticated appraisal requests
+      // Public form, no sign in needed. Only the form's own fields, starting
+      // as pending, with nothing an admin fills in later.
+      allow create: if request.resource.data.keys().hasOnly([
+            'clientName', 'clientEmail', 'clientPhone', 'userId',
+            'artworkDescription', 'purpose', 'images', 'urgency', 'status',
+            'assignedTo', 'appraisalReport', 'estimatedValue',
+            'createdAt', 'updatedAt'])
+        && request.resource.data.clientName is string
+        && request.resource.data.clientName.size() <= 200
+        && request.resource.data.clientEmail is string
+        && request.resource.data.clientEmail.size() <= 320
+        && request.resource.data.artworkDescription is string
+        && request.resource.data.artworkDescription.size() <= 5000
+        && request.resource.data.purpose in ['insurance', 'resale', 'estate', 'donation', 'curiosity']
+        && request.resource.data.status == 'pending'
+        && request.resource.data.assignedTo == null
+        && request.resource.data.appraisalReport == null
+        && request.resource.data.estimatedValue == null
+        && request.resource.data.images is list
+        && request.resource.data.images.size() <= 10
+        && (request.resource.data.userId == null
+            || (isAuthenticated() && request.resource.data.userId == request.auth.uid));
       allow update: if isAdmin();
       allow delete: if false;
     }
@@ -121,9 +145,11 @@ service cloud.firestore {
     // ==========================================
 
     match /newsletter_subscribers/{subscriberId} {
-      allow create: if true
-        && request.resource.data.keys().hasAll(['email', 'isActive', 'createdAt'])
-        && request.resource.data.email is string;
+      allow create: if request.resource.data.keys().hasAll(['email', 'isActive', 'createdAt'])
+        && request.resource.data.keys().hasOnly(['email', 'interests', 'source', 'isActive', 'createdAt'])
+        && request.resource.data.email is string
+        && request.resource.data.email.size() <= 320
+        && request.resource.data.isActive == true;
       allow read: if isAdmin();
       allow update: if isAdmin();
       allow delete: if isAdmin();

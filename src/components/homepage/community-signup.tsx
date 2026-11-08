@@ -11,7 +11,6 @@ const interestOptions = [
   { id: 'exhibitions', label: 'Gallery Exhibitions' },
   { id: 'spotlights', label: 'Artist Spotlights' },
   { id: 'events', label: 'Community Events' },
-  { id: 'appraisals', label: 'Appraisal Updates' },
 ];
 
 export function CommunitySignup() {

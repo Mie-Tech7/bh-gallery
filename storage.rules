@@ -3,50 +3,56 @@ rules_version = '2';
 service firebase.storage {
   match /b/{bucket}/o {
 
-    // Helper: check if user is authenticated
     function isAuthenticated() {
       return request.auth != null;
     }
 
-    // Helper: check if user is admin (via custom claims)
+    // Same admin check as firestore.rules: the role on the user's profile.
+    // The first deploy asks to let Storage rules read Firestore; say yes.
     function isAdmin() {
-      return isAuthenticated() && request.auth.token.admin == true;
+      return isAuthenticated()
+        && firestore.exists(/databases/(default)/documents/users/$(request.auth.uid))
+        && firestore.get(/databases/(default)/documents/users/$(request.auth.uid)).data.role == 'admin';
     }
 
-    // Product images: public read, admin write
-    match /products/{allPaths=**} {
-      allow read: if true;
-      allow write: if isAdmin();
-    }
-
-    // Artist images: public read, admin write
-    match /artists/{allPaths=**} {
-      allow read: if true;
-      allow write: if isAdmin();
-    }
-
-    // Site content images (hero, seasonal, etc.): public read, admin write
-    match /site_content/{allPaths=**} {
-      allow read: if true;
-      allow write: if isAdmin();
-    }
-
-    // Appraisal images: owner + admin read, authenticated write
-    match /appraisals/{requestId}/{allPaths=**} {
-      allow read: if isAdmin() || isAuthenticated();
-      allow write: if isAuthenticated();
-    }
-
-    // User collection images: owner write, conditional read
-    match /collections/{userId}/{allPaths=**} {
-      allow read: if isAuthenticated();
-      allow write: if isAuthenticated() && request.auth.uid == userId;
-    }
-
-    // Max file size: 10MB for images
-    match /{allPaths=**} {
-      allow write: if request.resource.size < 10 * 1024 * 1024
+    // Images only, under 10 MB.
+    function isImageUpload() {
+      return request.resource != null
+        && request.resource.size < 10 * 1024 * 1024
         && request.resource.contentType.matches('image/.*');
     }
+
+    // Product, artist and site images: public read, admin write
+    match /products/{allPaths=**} {
+      allow read: if true;
+      allow write: if isAdmin() && (request.resource == null || isImageUpload());
+    }
+
+    match /artists/{allPaths=**} {
+      allow read: if true;
+      allow write: if isAdmin() && (request.resource == null || isImageUpload());
+    }
+
+    match /site_content/{allPaths=**} {
+      allow read: if true;
+      allow write: if isAdmin() && (request.resource == null || isImageUpload());
+    }
+
+    // Appraisal photos are private: only admins can see them.
+    match /appraisals/{requestId}/{allPaths=**} {
+      allow read: if isAdmin();
+      allow create: if isAuthenticated() && isImageUpload();
+      allow update, delete: if isAdmin();
+    }
+
+    // A collector's own collection photos: the owner and admins only.
+    match /collections/{userId}/{allPaths=**} {
+      allow read: if isAuthenticated() && (request.auth.uid == userId || isAdmin());
+      allow write: if isAuthenticated() && request.auth.uid == userId
+        && (request.resource == null || isImageUpload());
+    }
+
+    // Everything else is closed. (The old catch-all let anyone upload
+    // anywhere, because Storage allows a request if any rule matches.)
   }
 }

@@ -13,13 +13,7 @@ const GRADIENT_COLORS = [
   'from-red-500 to-yellow-400',
 ];
 
-const DEFAULTS: Pick<Artist, 'id' | 'name' | 'slug' | 'style' | 'profileImage'>[] = [
-  { id: 'd-dd-ike', name: 'D.D. Ike Art Gallery', slug: 'dd-ike', style: 'Mixed Media · Jazz', profileImage: '' },
-  { id: 'd-michael-wallace', name: 'Michael Wallace Art Gallery', slug: 'michael-wallace', style: 'Cubist Portraiture', profileImage: '' },
-  { id: 'd-ted-ellis', name: 'Ted Ellis Art Gallery', slug: 'ted-ellis', style: 'Cultural Narrative', profileImage: '' },
-  { id: 'd-ernie-barnes', name: 'Ernie Barnes Art Gallery', slug: 'ernie-barnes', style: 'Neo-Mannerism', profileImage: '' },
-  { id: 'd-gerald-ivey', name: 'Gerald Ivey Art Gallery', slug: 'gerald-ivey', style: 'Abstract Figuration', profileImage: '' },
-];
+// No stand-in artists: show only real ones from Firestore.
 
 export function FeaturedArtists({ artists }: { artists: Artist[] }) {
   const scrollRef = useRef<HTMLDivElement>(null);
@@ -29,8 +23,8 @@ export function FeaturedArtists({ artists }: { artists: Artist[] }) {
     scrollRef.current.scrollBy({ left: dir === 'right' ? 320 : -320, behavior: 'smooth' });
   }, []);
 
-  const list: Pick<Artist, 'id' | 'name' | 'slug' | 'style' | 'profileImage'>[] =
-    artists.length ? artists : DEFAULTS;
+  const list: Pick<Artist, 'id' | 'name' | 'slug' | 'style' | 'profileImage'>[] = artists;
+  if (!list.length) return null;
 
   return (
     <section className="relative py-16 md:py-22 overflow-hidden" aria-label="Featured artists">

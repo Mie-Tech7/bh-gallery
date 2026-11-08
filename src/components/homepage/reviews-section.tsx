@@ -32,7 +32,7 @@ export function ReviewsSection({ reviews }: { reviews: Review[] }) {
           <div className="flex items-center gap-4">
             <div className="flex items-center gap-2">
               <StarRating rating={5} size={18}/>
-              <span className="text-body-md font-sans font-semibold text-bhg-black">16,469 Reviews</span>
+              <span className="text-body-md font-sans font-semibold text-bhg-black">{reviews.length} {reviews.length === 1 ? 'Review' : 'Reviews'}</span>
             </div>
             <div className="hidden md:flex items-center gap-2">
               <button onClick={() => scroll('left')} className="w-9 h-9 rounded-full border border-bhg-gray-200 flex items-center justify-center text-bhg-gray-600 hover:border-bhg-copper hover:text-bhg-copper transition-colors" aria-label="Previous reviews"><ChevronLeft size={16}/></button>
