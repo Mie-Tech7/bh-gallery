@@ -10,7 +10,7 @@ const DEFAULTS: HeroContent = {
   headline: 'The Black Heritage Gallery',
   headlineAccent: 'Returns',
   subtitle: 'Founded by Robbie Lee',
-  tagline: 'Celebrating Black art and the voices of Black & African artists.',
+  tagline: 'Offering the African American community and its artists a space to see and be seen.',
   ctaPrimary: { text: 'Learn Our Story', link: '/about' },
   ctaSecondary: { text: 'Appraisals', link: '/appraisal' },
   // Slides stay as color panels until photos of her pieces are ready.

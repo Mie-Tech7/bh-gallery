@@ -20,7 +20,7 @@ const bodyFont = DM_Sans({
 });
 
 const DESCRIPTION =
-  'Black Heritage Gallery, founded by Robbie Lee, celebrates African American art and the voices of Black artists.';
+  'Black Heritage Gallery, founded by Robbie Lee in Houston: offering the African American community and its artists a space to see and be seen.';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://bh-gallery.com'),

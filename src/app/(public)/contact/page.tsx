@@ -3,7 +3,6 @@ import Link from 'next/link';
 import { Mail, Phone, MapPin, Clock } from 'lucide-react';
 import { SiteHeader } from '@/components/layout/site-header';
 import { SiteFooter } from '@/components/layout/site-footer';
-import { Placeholder } from '@/components/ui/placeholder';
 import { site } from '@/content/site';
 
 export const metadata: Metadata = {
@@ -14,36 +13,30 @@ export const metadata: Metadata = {
 export default function ContactPage() {
   const { contact } = site;
 
-  const rows = [
-    {
+  // Only show what she has confirmed. Null fields are left off.
+  type Row = { icon: typeof Mail; label: string; value: React.ReactNode };
+  const rows: Row[] = ([
+    contact.email && {
       icon: Mail,
       label: 'Email',
-      value: contact.email ? (
-        <a href={`mailto:${contact.email}`} className="hover:text-bhg-copper">{contact.email}</a>
-      ) : (
-        <Placeholder>public email</Placeholder>
-      ),
+      value: <a href={`mailto:${contact.email}`} className="hover:text-bhg-copper">{contact.email}</a>,
     },
-    {
+    contact.phone && {
       icon: Phone,
       label: 'Phone',
-      value: contact.phone ? (
-        <a href={`tel:${contact.phone.replace(/\D/g, '')}`} className="hover:text-bhg-copper">{contact.phone}</a>
-      ) : (
-        <Placeholder>public phone</Placeholder>
-      ),
+      value: <a href={`tel:${contact.phone.replace(/\D/g, '')}`} className="hover:text-bhg-copper">{contact.phone}</a>,
     },
-    {
+    (contact.address || site.location) && {
       icon: MapPin,
       label: 'Location',
-      value: contact.address ?? site.location ?? <Placeholder>city, or full address if visits are open</Placeholder>,
+      value: contact.address ?? site.location,
     },
-    {
+    contact.hours && {
       icon: Clock,
       label: 'Visits',
-      value: contact.hours ?? <Placeholder>hours, or &quot;by appointment&quot;</Placeholder>,
+      value: contact.hours,
     },
-  ];
+  ] as Array<Row | null | false | '' | undefined>).filter((row): row is Row => Boolean(row));
 
   return (
     <>
@@ -53,7 +46,7 @@ export default function ContactPage() {
           <div className="container-bhg max-w-3xl">
             <h1 className="section-heading mb-4">Contact</h1>
             <p className="text-body-lg text-bhg-gray-600">
-              Questions about a piece, a visit or the collection? Reach {site.galleryName} here.
+              Questions about a piece or the collection? Email {site.founderName} directly.
             </p>
           </div>
         </section>

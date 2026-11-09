@@ -6,7 +6,7 @@ import { cn } from '@/lib/utils';
 import { createAppraisalRequest } from '@/lib/firebase/db';
 import type { AppraisalPurpose } from '@/types';
 import toast from 'react-hot-toast';
-import { site, APPRAISAL_BRAND_COMING_SOON } from '@/content/site';
+import { site, APPRAISAL_BRAND_COMING_SOON, listToText } from '@/content/site';
 import { Placeholder } from '@/components/ui/placeholder';
 
 const processSteps = [
@@ -107,8 +107,14 @@ export function AppraisalService() {
 
             <div className="card p-7 md:p-8">
               <h2 className="font-serif text-heading-md text-bhg-black mb-4">About the appraiser</h2>
-              <p className="text-body-md text-bhg-gray-600 leading-relaxed mb-3">{site.founderName}</p>
-              <Placeholder block>credentials, years appraising and areas of expertise, once confirmed</Placeholder>
+              <p className="text-body-md text-bhg-gray-600 leading-relaxed mb-3">
+                {site.founderName} ran {site.galleryName} in a physical space for 37 years and has spent the past 13 years
+                selling and appraising African American art.
+              </p>
+              <p className="text-body-md text-bhg-gray-600 leading-relaxed">
+                She knows the work of {listToText(site.artistsKnown)} deeply, along with Houston artists{' '}
+                {listToText(site.houstonArtistsKnown)}.
+              </p>
             </div>
 
             <div className="card p-7 md:p-8">

@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { SiteHeader } from '@/components/layout/site-header';
 import { SiteFooter } from '@/components/layout/site-footer';
 import { Placeholder } from '@/components/ui/placeholder';
-import { site } from '@/content/site';
+import { site, listToText } from '@/content/site';
 
 export const metadata: Metadata = {
   title: 'About',
@@ -18,9 +18,10 @@ export default function AboutPage() {
         <section className="bg-bhg-cream-warm py-16 md:py-20">
           <div className="container-bhg max-w-3xl">
             <h1 className="section-heading mb-4">About the gallery</h1>
-            <p className="text-body-lg text-bhg-gray-600 leading-relaxed">
+            <p className="text-body-lg text-bhg-gray-600 leading-relaxed mb-3">
               {site.galleryName} was founded by {site.founderName}. It began as {site.formerName}.
             </p>
+            <p className="font-serif italic text-body-lg text-bhg-black">{site.mission}</p>
           </div>
         </section>
 
@@ -28,10 +29,11 @@ export default function AboutPage() {
           <div className="container-bhg max-w-3xl space-y-14">
             <div>
               <h2 className="font-serif text-heading-lg text-bhg-black mb-4">Our story</h2>
-              <Placeholder block>
-                the gallery&apos;s story in her words: how her collecting started, when and where the gallery
-                opened, the locations over the years, and how it runs today
-              </Placeholder>
+              <div className="space-y-4 text-body-lg text-bhg-gray-600 leading-relaxed">
+                {site.story.map((para) => (
+                  <p key={para}>{para}</p>
+                ))}
+              </div>
             </div>
 
             <div className="grid grid-cols-1 md:grid-cols-[220px_1fr] gap-8 items-start">
@@ -42,7 +44,9 @@ export default function AboutPage() {
                 <h2 className="font-serif text-heading-lg text-bhg-black mb-4">{site.founderName}</h2>
                 <p className="text-body-md text-bhg-gray-600 mb-4">Founder and owner</p>
                 <div className="space-y-4">
-                  <Placeholder block>short bio: background, schooling and career before the gallery</Placeholder>
+                  {site.founderBio.map((para) => (
+                    <p key={para} className="text-body-lg text-bhg-gray-600 leading-relaxed">{para}</p>
+                  ))}
                   <p className="text-body-lg text-bhg-gray-600 leading-relaxed">{site.biggersLine}</p>
                 </div>
               </div>
@@ -50,12 +54,21 @@ export default function AboutPage() {
 
             <div>
               <h2 className="font-serif text-heading-lg text-bhg-black mb-4">Artists we know best</h2>
-              <Placeholder block>artists she is comfortable naming, starting with Dr. John Biggers</Placeholder>
+              <p className="text-body-lg text-bhg-gray-600 leading-relaxed mb-3">
+                {site.founderName} knows the early masters of African American art deeply:{' '}
+                {listToText(site.artistsKnown)}. Closer to home, she knows the work of Houston
+                artists {listToText(site.houstonArtistsKnown)}.
+              </p>
             </div>
 
             <div>
-              <h2 className="font-serif text-heading-lg text-bhg-black mb-4">In the community</h2>
-              <Placeholder block>exhibits, honors and community work she wants listed</Placeholder>
+              <h2 className="font-serif text-heading-lg text-bhg-black mb-4">Artists the gallery has carried</h2>
+              <ul className="grid grid-cols-2 sm:grid-cols-3 gap-x-6 gap-y-1.5 text-body-md text-bhg-gray-600">
+                {site.artistsCarried.map((name) => (
+                  <li key={name}>{name}</li>
+                ))}
+              </ul>
+              <p className="text-body-sm text-bhg-gray-600 mt-3">And many more.</p>
             </div>
 
             <div className="border-t border-bhg-gray-200 pt-10 flex flex-wrap gap-4">

@@ -1,6 +1,5 @@
 import Link from 'next/link';
 import { site } from '@/content/site';
-import { Placeholder } from '@/components/ui/placeholder';
 
 const pageLinks = [
   { label: 'About', href: '/about' },
@@ -35,7 +34,7 @@ export function SiteFooter() {
               <span className="font-serif text-heading-sm text-bhg-copper">{site.galleryName}</span>
             </div>
             <p className="text-body-sm text-bhg-gray-600 mb-6">
-              {site.tagline ?? <Placeholder>footer tagline</Placeholder>}
+              {site.tagline}
             </p>
             {socials.length > 0 && (
               <div className="flex items-center gap-2">
@@ -71,21 +70,17 @@ export function SiteFooter() {
           <div>
             <h3 className="text-caption uppercase tracking-widest text-bhg-black font-sans font-semibold mb-4">Contact</h3>
             <div className="space-y-3 text-body-sm text-bhg-gray-600">
-              <p>{site.location ?? <Placeholder>city and state</Placeholder>}</p>
-              <p>
-                {contact.phone ? (
+              {site.location && <p>{site.location}</p>}
+              {contact.phone && (
+                <p>
                   <a href={`tel:${contact.phone.replace(/\D/g, '')}`} className="hover:text-bhg-copper transition-colors">{contact.phone}</a>
-                ) : (
-                  <Placeholder>public phone</Placeholder>
-                )}
-              </p>
-              <p>
-                {contact.email ? (
+                </p>
+              )}
+              {contact.email && (
+                <p>
                   <a href={`mailto:${contact.email}`} className="hover:text-bhg-copper transition-colors">{contact.email}</a>
-                ) : (
-                  <Placeholder>public email</Placeholder>
-                )}
-              </p>
+                </p>
+              )}
             </div>
           </div>
         </div>

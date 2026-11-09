@@ -1,3 +1,4 @@
+import Link from 'next/link';
 import { site } from '@/content/site';
 import { Placeholder } from '@/components/ui/placeholder';
 
@@ -19,11 +20,12 @@ export function HeritageMission() {
               <p>
                 {site.galleryName} was founded by{' '}
                 <strong className="font-semibold text-bhg-black">{site.founderName}</strong>. It began as{' '}
-                {site.formerName}.
+                {site.formerName}, with one purpose: {site.mission.charAt(0).toLowerCase() + site.mission.slice(1)}
               </p>
-              <Placeholder block>two or three sentences of her story in her words: when it opened, where, and what it stood for</Placeholder>
+              <p>{site.story[0]}</p>
               <p>{site.biggersLine}</p>
             </div>
+            <Link href="/about" className="btn-secondary mt-8 inline-flex">Read her story</Link>
           </div>
         </div>
       </div>
