@@ -7,7 +7,6 @@ import { createAppraisalRequest } from '@/lib/firebase/db';
 import type { AppraisalPurpose } from '@/types';
 import toast from 'react-hot-toast';
 import { site, APPRAISAL_BRAND_COMING_SOON, listToText } from '@/content/site';
-import { Placeholder } from '@/components/ui/placeholder';
 
 const processSteps = [
   'You describe the piece and why you need a value',
@@ -102,7 +101,10 @@ export function AppraisalService() {
                 {site.galleryName} shows and sells art. Valuing art is kept apart from selling it, so an
                 appraisal is never shaped by a sale.
               </p>
-              <Placeholder block className="bg-white/90">fee policy (research suggests flat fees, never a percentage of value)</Placeholder>
+              <p className="text-body-md text-white/90 leading-relaxed">
+                Each appraisal is quoted on request. The fee depends on the artist and how many pieces
+                you have.
+              </p>
             </div>
 
             <div className="card p-7 md:p-8">
