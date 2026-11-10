@@ -21,7 +21,7 @@ export interface SiteFacts {
   artistsKnown: string[];
   /** Houston artists she knows deeply (her words, Nov 9). */
   houstonArtistsKnown: string[];
-  /** Artists the gallery carried, from the old flyer ("and many more"). Lyman Jackson removed at her request (Nov 9). */
+  /** Artists the gallery carried, from the old flyer ("and many more"). Lyman Jackson removed and Earlie Hudnall added at her request (Nov 9). */
   artistsCarried: string[];
   /** Approved by her (Josh, Nov 8). Adapted from the LinkedIn About draft. */
   biggersLine: string;
@@ -73,7 +73,7 @@ export const site: SiteFacts = {
   artistsCarried: [
     'Andrew Thompson', 'Annie Lee', 'Ava Cosey', 'Brenda Joysmith', 'Burford Evans', 'Burl Washington',
     'Caryle Thompson', 'Charles Bibbs', 'Charles Criner', 'Charles Washington', 'Charles White',
-    'Elizabeth Catlett', 'Ellis Wilson', 'Emaniah Shinar', 'Ernest Snell', 'Ernie Barnes',
+    'Earlie Hudnall', 'Elizabeth Catlett', 'Ellis Wilson', 'Emaniah Shinar', 'Ernest Snell', 'Ernie Barnes',
     'Elizabeth Shelton', 'Frank Frazier', 'Gilbert Young', 'Hughie Lee Smith', 'Jacob Lawrence',
     'James Denmark', 'John Hollyfield', 'John T. Biggers', 'Jonathan Green', 'Joseph Holston', 'Karl Hall',
     'Kathleen Wilson', 'Lee White', 'Leroy Campbell', 'LeShaun Beal', 'Lionel Lofton', 'Patti Sinex', 'Paul Goodnight', 'Romare Bearden', 'Ted Ellis', 'Tom McKinney', 'Varnette Honeywood',
